@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="深度学习,优化算法,梯度下降,SGD,Momentum,Nesterov,Adam,牛顿法," />
 
 
 
@@ -84,15 +84,18 @@
 
 
 
-<meta name="description" content="一拳打死一头驴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yisong's Blog">
-<meta property="og:url" content="http://liyisong.com/index.html">
+<meta name="description" content="关于深度学习对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考colah’s blog。神经网络的结构脱胎于概率图模型，人们发现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习中的优化算法">
+<meta property="og:url" content="http://liyisong.com/2016/11/05/深度学习中的优化算法/index.html">
 <meta property="og:site_name" content="Yisong's Blog">
-<meta property="og:description" content="一拳打死一头驴">
+<meta property="og:description" content="关于深度学习对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考colah’s blog。神经网络的结构脱胎于概率图模型，人们发现">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/Nesterov.png">
+<meta property="og:updated_time" content="2016-11-05T01:40:49.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yisong's Blog">
-<meta name="twitter:description" content="一拳打死一头驴">
+<meta name="twitter:title" content="深度学习中的优化算法">
+<meta name="twitter:description" content="关于深度学习对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考colah’s blog。神经网络的结构脱胎于概率图模型，人们发现">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/Nesterov.png">
 
 
 
@@ -113,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://liyisong.com/"/>
+  <link rel="canonical" href="http://liyisong.com/2016/11/05/深度学习中的优化算法/"/>
 
 
-  <title> Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 深度学习中的优化算法 | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -137,9 +140,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -226,9 +227,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -248,10 +249,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/11/05/深度学习中的优化算法/" itemprop="url">
-                  深度学习中的优化算法
-                </a>
+                深度学习中的优化算法
               
             
           </h1>
@@ -310,9 +308,7 @@
       
 
       
-        
-          
-            <h3 id="关于深度学习"><a href="#关于深度学习" class="headerlink" title="关于深度学习"></a>关于深度学习</h3><p>对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考<a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/" target="_blank" rel="external">colah’s blog</a>。神经网络的结构脱胎于概率图模型，人们发现这种每一层的neuron相互独立的结构比较有效，对于处理过拟合问题也有帮助。而且网络层数越深，performance越好，故美其名曰“深度学习”，关于“深度”的探讨可以参考Kaiming He组的这篇划时代的<a href="https://arxiv.org/pdf/1512.03385v1.pdf" target="_blank" rel="external">ResNet</a>。</p>
+        <h3 id="关于深度学习"><a href="#关于深度学习" class="headerlink" title="关于深度学习"></a>关于深度学习</h3><p>对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考<a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/" target="_blank" rel="external">colah’s blog</a>。神经网络的结构脱胎于概率图模型，人们发现这种每一层的neuron相互独立的结构比较有效，对于处理过拟合问题也有帮助。而且网络层数越深，performance越好，故美其名曰“深度学习”，关于“深度”的探讨可以参考Kaiming He组的这篇划时代的<a href="https://arxiv.org/pdf/1512.03385v1.pdf" target="_blank" rel="external">ResNet</a>。</p>
 <p>拿深度学习在计算机视觉领域的应用举例来说，从最早的AlexNet到最近的ResNet，大家所做的努力无非就是加一加网络层数、改一改激活函数、改一改kernel的大小、改一改卷积层和pooling层的排列顺序、加一加batch normalization、加一加dropout做一做正则化、处理一下在back propgation过程中的梯度消失问题，关于各类CNN结构的对比，我准备日后总结一篇详尽的文章，在此先按下不表。</p>
 <h3 id="扯个犊子"><a href="#扯个犊子" class="headerlink" title="扯个犊子"></a>扯个犊子</h3><p>记得没错的话，我院<a href="http://yima.csl.illinois.edu" target="_blank" rel="external">马大神</a>前段时间去墨西哥参加一个workshop，回来在课上讲到<a href="http://yann.lecun.com" target="_blank" rel="external">Yann LeCun</a>和他在交流的时候开玩笑似的说到人们在深度学习领域的进展其实也是一个stochastic gradient descent，现在所谓的人工智能重点在前两个字，真的是“<strong>人工</strong>”智能，所谓的deep learning其实可以叫做”<strong>human</strong>“ learning，所有的事情都是人做的，机器只会傻不拉叽的让干啥就干啥。拿<a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a>前几天的一条twitter博大家一笑：</p>
 <blockquote>
@@ -360,172 +356,73 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 </ul>
 <p>才疏学浅，就正于各位方家。</p>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/04/Hello-World/" itemprop="url">
-                  Hello，独立博客
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-04T12:30:23+08:00" content="2016-11-04">
-              2016-11-04
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
-                    <span itemprop="name">生活感悟</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/深度学习/" rel="tag">#深度学习</a>
           
-
+            <a href="/tags/优化算法/" rel="tag">#优化算法</a>
           
-            
+            <a href="/tags/梯度下降/" rel="tag">#梯度下降</a>
           
-
+            <a href="/tags/SGD/" rel="tag">#SGD</a>
           
-
+            <a href="/tags/Momentum/" rel="tag">#Momentum</a>
           
+            <a href="/tags/Nesterov/" rel="tag">#Nesterov</a>
           
-
+            <a href="/tags/Adam/" rel="tag">#Adam</a>
+          
+            <a href="/tags/牛顿法/" rel="tag">#牛顿法</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello, World!"></a>Hello, World!</h3><p>如同每个人在学习coding的时候刚开始都会在屏幕上打印出那句 “Hello, World!” 一样，其实在尝试任何新鲜的事物的伊始，都需要一个“仪式感”，以昭告天下说自己要在这个领域撒开腿儿的折腾一番。是的，我要开始写自己的独立博客啦！</p>
-<p>举例子来说，虽然现在的手机成像素质已经非常高了，管你是索尼全幅还是徕卡旁轴，放到社交网络上一压缩，我反正看不出来有太大的区别。但是我还是喜欢用相机拍照，带EVF(电子取景器)的相机，虽然技术不怎么样，但为的就是闭上一只眼睛，咪起另一只对准取景框的那一瞬间带来的“仪式感”。有门槛的事情才值得你去做。</p>
-<p>虽然会弹的曲子不多，但给吉他换完弦以后，总要把伸出来的那部分琴弦乱糟糟的盘在琴头，越乱越好，然后把变调夹以一个不对称的角度夹在旋钮旁边，嗯，这样比较装逼。</p>
-<h3 id="为什么是独立博客？"><a href="#为什么是独立博客？" class="headerlink" title="为什么是独立博客？"></a>为什么是独立博客？</h3><p>酝酿着要弄一个自己的博客已经有些日子了，之前也想过在CSDN或是简书上搭建，但总觉的那些都不够纯粹，不够 “independent”。 最终选择了 Hexo+GitHub 的组合。然后去买了自己的顶级域名，又是一笔败家子儿的支出，回头想想，除此之外，还有每年爬梯服务，张淼的podcast，许岑的大王系列，杂七杂八的软件。</p>
-<p>肉疼。</p>
-<p>但这一切都是值得的。</p>
-<p>总的来说，我这套方案的优点如下：</p>
-<ul>
-<li><strong>简洁</strong>。你总不希望自己的博客页面上各种杂七杂八的广告乱飞吧。</li>
-<li><strong>够有范儿</strong>。拉到最上边的地址栏看看我的域名，嗯，那个就是我的名字。</li>
-<li><strong>省心</strong>。最近国内各家的网盘服务一个接一个的挂掉了，人心惶惶。要是哪天GitHub挂掉了我就在家看日出日落、刮风打雷。</li>
-<li><strong>记录</strong>。这是写博客最根本的目的，即便是现在的自己写的全是水文，但是在这个过程中自己会有所提高，相信会慢慢好起来的，希望生活会在某个时间节点上给自己意想不到的回报。</li>
-</ul>
-<h3 id="关于博客的内容"><a href="#关于博客的内容" class="headerlink" title="关于博客的内容"></a>关于博客的内容</h3><p>我的初衷是以技术性内容为主，分享一些在学习 Machine Learning, Deep Learning, Computer Vison, Natural Language Processing 过程中的困惑和心得，夹杂一些弹吉他、拍照片的小tips, 还有对生活的感悟。至于最后能做到什么程度，我自己心里也没谱。</p>
-<p>才疏学浅，就正于各位方家。</p>
-<h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><p>感谢 GitHub, Hexo, Node.js, GoDaddy, DNSPod, Markdown，以及如下各位在建站的过程中给予我的灵感和技术上的参考，分享让这个世界变得更美好。</p>
-<ul>
-<li><a href="http://wuchong.me" target="_blank" rel="external">http://wuchong.me</a></li>
-<li><a href="http://colah.github.io" target="_blank" rel="external">http://colah.github.io</a></li>
-<li><a href="http://ibruce.info" target="_blank" rel="external">http://ibruce.info</a></li>
-<li><a href="http://theme-next.iissnan.com" target="_blank" rel="external">http://theme-next.iissnan.com</a></li>
-</ul>
-<p>哦，对了：</p>
-<p>Hello, World!</p>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/04/Hello-World/" rel="next" title="Hello，独立博客">
+                <i class="fa fa-chevron-left"></i> Hello，独立博客
+              </a>
+            
+          </div>
 
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -533,6 +430,10 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -552,8 +453,17 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -603,6 +513,17 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#关于深度学习"><span class="nav-number">1.</span> <span class="nav-text">关于深度学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扯个犊子"><span class="nav-number">2.</span> <span class="nav-text">扯个犊子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为Gradient-Descent"><span class="nav-number">3.</span> <span class="nav-text">何为Gradient Descent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一阶算法"><span class="nav-number">4.</span> <span class="nav-text">一阶算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Vanilla-SGD"><span class="nav-number">4.1.</span> <span class="nav-text">Vanilla SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum-update"><span class="nav-number">4.2.</span> <span class="nav-text">Momentum update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nesterov-Momentum"><span class="nav-number">4.3.</span> <span class="nav-text">Nesterov Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">4.4.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp"><span class="nav-number">4.5.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">4.6.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二阶算法"><span class="nav-number">5.</span> <span class="nav-text">二阶算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#牛顿法"><span class="nav-number">5.1.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L-BFGS"><span class="nav-number">5.2.</span> <span class="nav-text">L-BFGS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -699,6 +620,10 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 
