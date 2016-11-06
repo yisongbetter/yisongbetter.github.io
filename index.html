@@ -212,9 +212,37 @@
       
 
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
     </ul>
   
 
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'v1Dyyxb3Zjr6GdnbmbaM','2.0.0');
+</script>
+
+
+
+    </div>
   
 </nav>
 
@@ -291,6 +319,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/05/深度学习中的优化算法/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/05/深度学习中的优化算法/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -311,56 +346,12 @@
 
       
         
-          
-            <h3 id="关于深度学习"><a href="#关于深度学习" class="headerlink" title="关于深度学习"></a>关于深度学习</h3><p>对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考<a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/" target="_blank" rel="external">colah’s blog</a>。神经网络的结构脱胎于概率图模型，人们发现这种每一层的neuron相互独立的结构比较有效，对于处理过拟合问题也有帮助。而且往往是网络层数越深，performance越好，故美其名曰“深度学习”，关于“深度”的探讨可以参考Kaiming He组的这篇划时代的<a href="https://arxiv.org/pdf/1512.03385v1.pdf" target="_blank" rel="external">ResNet</a>。</p>
-<p>拿深度学习在计算机视觉领域的应用举例来说，从最早的AlexNet到最近的ResNet，大家所做的努力无非就是加一加网络层数、改一改激活函数、改一改kernel的大小、改一改卷积层和pooling层的排列顺序、加一加batch normalization、加一加dropout做一做正则化、处理一下在back propgation过程中的梯度消失问题，关于各类CNN结构的对比，我准备日后总结一篇详尽的文章，在此先按下不表。</p>
-<h3 id="扯个犊子"><a href="#扯个犊子" class="headerlink" title="扯个犊子"></a>扯个犊子</h3><p>记得没错的话，我院<a href="http://yima.csl.illinois.edu" target="_blank" rel="external">马大神</a>前段时间去墨西哥参加一个workshop，回来在课上讲到<a href="http://yann.lecun.com" target="_blank" rel="external">Yann LeCun</a>和他在交流的时候开玩笑似的说到人们在深度学习领域的进展其实也是一个stochastic gradient descent，现在所谓的人工智能重点在前两个字，真的是“<strong>人工</strong>”智能，所谓的deep learning其实可以叫做”<strong>human</strong>“ learning，所有的事情都是人做的，机器只会傻不拉叽的让干啥就干啥。拿<a href="http://cs.stanford.edu/people/karpathy/" target="_blank" rel="external">Andrej Karpathy</a>前几天的一条twitter博大家一笑：</p>
-<blockquote>
-<p>Coworker on Rl research:”We were supposed to make AI do all the work and we play games but we do all the work and  the AI is playing games!”</p>
-</blockquote>
-<p>神经网络的优化是一个既非凸也不smooth的问题。目前的优化算法大都是基于gradient descent的一阶算法，由于本人不是学优化出身，如有不对的地方敬请斧正和谅解，班门弄斧，抛砖引玉。</p>
-<h3 id="何为Gradient-Descent"><a href="#何为Gradient-Descent" class="headerlink" title="何为Gradient Descent"></a>何为Gradient Descent</h3><p>Gradient的方向是函数在当前点上升最快的方向，我们的目标函数都是写成cost function的形式，我们希望它越小越好，所以直觉上大概要往梯度的反方向走，在当前点环顾四周选择一个方向，走一步，再环顾四周选择一个方向，再走一步，重复如此直到我们满意为止。有点儿类似于算法中的贪心法，每次在当前点选一个对于目前来说最优的方向。至于每一步具体往哪个方向走，要走多远，不同的算法有不同的策略，关于要走多少步的问题，天真的我在刚刚入门的时候一直以为是要设一个threshold，当梯度小于这个threshold的时候就终止迭代，后来才知道通用的做法是固定迭代次数，每次取训练集中的一个小patch，当所有的训练集被抽过一遍叫一个epoch，所以通用的深度学习框架如<a href="http://mxnet.io" target="_blank" rel="external">mxnet</a>给的API都是让你输入patch的大小和要训练的epoch，那么迭代次数可以被简单的计算出：</p>
-<pre><code>num_iter = num_train/len_patch * num_epoch
-</code></pre><h3 id="一阶算法"><a href="#一阶算法" class="headerlink" title="一阶算法"></a>一阶算法</h3><p>顾名思义，一阶算法就是只利用cost function的一阶梯度信息的算法，如：Vanilla SGD、Momentum update、Nesterov Momentum、AdaGrad、RMSProp、Adam。</p>
-<p>传统的Batch Gradient Descent的问题在于每迭代一次都要遍历所有的训练数据，对于计算量和内存的需求太大，这样做显然是很蠢的。</p>
-<p>声明一点，我们所说的Stachastic Gradient Descent实际上是指的是Mini-batch Gradient Descent，每次取一个小的patch去更新梯度而不是真的只取一条数据，这样更有效率。</p>
-<h4 id="Vanilla-SGD"><a href="#Vanilla-SGD" class="headerlink" title="Vanilla SGD"></a>Vanilla SGD</h4><p>采用最简单的更新策略，可以表示为：</p>
-<pre><code>x += -learning_rate * dx
-</code></pre><p>其中learning_rate是一个常量。</p>
-<h4 id="Momentum-update"><a href="#Momentum-update" class="headerlink" title="Momentum update"></a>Momentum update</h4><p>从物理学的角度出发，引入一个速度，梯度先影响速度，速度再影响位置：</p>
-<pre><code>v = mu * v - learning_rate * dx
-x += v
-</code></pre><p>v是一个被初始化为0的变量，mu是一个固定的hyper-parameter，可以比作为动量，一般设为0.9，在后面的epoch中可以慢慢提高。这种方法的优点是积累的速度v可以让我们越过局部最小点，但也可能造成在全局最优点来回震荡。</p>
-<h4 id="Nesterov-Momentum"><a href="#Nesterov-Momentum" class="headerlink" title="Nesterov Momentum"></a>Nesterov Momentum</h4><p>基于Momentum update方法，更新时向前“多看一步”，在那个新的位置计算梯度，再结合速度影响位置。有点儿像控制理论PID控制器里面的这个微分项，“预测”一下系统的变化：</p>
-<pre><code>x_ahead = x + mu * v
-v = mu * v - learning_rate * dx_ahead
-x += v
-</code></pre><p>引用stanford cs231n的图，这两者的区别可以表示为：</p>
-<p><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/Nesterov.png" width="600" alt="Nesterov" align="center"><br></div>    </p>
-<h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>由<a href="http://jmlr.org/papers/v12/duchi11a.html" target="_blank" rel="external">Duchi et al</a>提出，属于逐参数适应学习率的方法。核心思想是让learning_rate被当前的梯度dominate，用一个cache变量来跟踪梯度，用来element-wise归一化参数更新步长,接收到高梯度值的权重更新的效果被减弱，而接收到低梯度值的权重的更新效果将会增强,从而会让不同的维度scale更接近, 达到类似于batch normalization的数据预处理的效果：</p>
-<pre><code>cache += dx ** 2
-x += -learning_rate * dx / (np.sqrt(cache) + eps)
-</code></pre><h4 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h4><p>出自<a href="http://www.cs.toronto.edu/~hinton/" target="_blank" rel="external">Geoff Hinton</a>老爷子之手，是AdaGrad的改进版本，让cache指数衰减，但也多占用了很多空间：</p>
-<pre><code>cache =  decay_rate * cache + (1 - decay_rate) * dx ** 2
-x += - learning_rate * dx / (np.sqrt(cache) + eps)
-</code></pre><p>其中decay_rate是一个hyper-parameter，一般取0.9。     </p>
-<h4 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h4><p>由<a href="https://arxiv.org/abs/1412.6980" target="_blank" rel="external">Adam</a>提出，综合了RMSProp和Momentum update的思想, 多数情况下performance最好，是目前很多深度学习开源框架的默认算法：</p>
-<pre><code>m = beta1 * m + (1 - beta1) * dx
-v = beta2 * v + (1 - beta2) * (dx ** 2)
-mb = m / (1 - beta1 ** t)
-mv = v / (1 - beta2 ** t)
-x += -learning_rate * mb / (np.sqrt(vb) + eps)
-</code></pre><p>其中通常取eps=1e-8, beta1=0.9, beta2=0.999，由于m、v初始为0，在算法完全热身之前存在一定偏差，所以采取了补偿措施。</p>
-<h3 id="二阶算法"><a href="#二阶算法" class="headerlink" title="二阶算法"></a>二阶算法</h3><p>顾名思义，该类算法需要用到目标函数的二阶导数信息，由于很少被用到深度学习中，只贴上基本概念。</p>
-<h4 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h4><p>具体可参考<a href="https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization" target="_blank" rel="external">Newton’s method</a>:<br>$$x \leftarrow x - [Hf(x)]^{-1} \nabla f(x)$$<br>其中Hf(x)是<a href="https://en.wikipedia.org/wiki/Hessian_matrix" target="_blank" rel="external">Hessian</a>矩阵,即二阶偏导数的平方矩阵，描述了目标函数的局部曲率，从而使得可以进行更高效的参数更新。具体来说，就是乘以Hessian转置矩阵可以让最优化过程在曲率小的时候大步前进，在曲率大的时候小步前进。对比一阶算法的优点是没有了learning_rate这个hyper-parameter，但是计算Hessian矩阵以及它的逆矩阵太费时间和空间了。</p>
-<h4 id="L-BFGS"><a href="#L-BFGS" class="headerlink" title="L-BFGS"></a>L-BFGS</h4><p>拟牛顿法的一种<a href="https://en.wikipedia.org/wiki/Limited-memory_BFGS" target="_blank" rel="external">Limited-memory BFGS</a>，用于近似转置Hessian矩阵，它在整个训练集上的表现较好，但在mini-batch上的表现就不尽如人意了，所以很难做到scalable。</p>
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
-<li><a href="http://colah.github.io" target="_blank" rel="external">http://colah.github.io</a></li>
-<li><a href="http://cs231n.stanford.edu" target="_blank" rel="external">http://cs231n.stanford.edu</a></li>
-</ul>
-<p>才疏学浅，就正于各位方家。</p>
-
-          
+          <h3 id="关于深度学习"><a href="#关于深度学习" class="headerlink" title="关于深度学习"></a>关于深度学习</h3><p>对于深度学习中的网络结构，不管是全连接、卷积、递归都可以被概括为线性映射加非线性的activation的concatenation，说白了神经网络就是一个function formulator，其实和傅立叶变换、小波变换在做类似的事情，只不过它是以一种data-driven的方法逐渐逼近输入到输出的函数，深入的理解可参考<a href="http://colah.github.io/posts/2014-03-NN-Manifolds-Topology/">colah’s blog</a>。神经网络的结构脱胎于概率图模型，人们发现这种每一层的neuron相互独立的结构比较有效，对于处理过拟合问题也有帮助。而且往往是网络层数越深，performance越好，故美其名曰“深度学习”，关于“深度”的探讨可以参考Kaiming He组的这篇划时代的<a href="https://arxiv.org/pdf/1512.03385v1.pdf">ResNet</a>。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/05/深度学习中的优化算法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -450,6 +441,13 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/04/Hello-World/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/04/Hello-World/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -470,33 +468,12 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 
       
         
-          
-            <h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello, World!"></a>Hello, World!</h3><p>如同每个人在学习coding的时候刚开始都会在屏幕上打印出那句 “Hello, World!” 一样，其实在尝试任何新鲜的事物的伊始，都需要一个“仪式感”，以昭告天下说自己要在这个领域撒开腿儿的折腾一番。是的，我要开始写自己的独立博客啦！</p>
-<p>举例子来说，虽然现在的手机成像素质已经非常高了，管你是索尼全幅还是徕卡旁轴，放到社交网络上一压缩，我反正看不出来有太大的区别。但是我还是喜欢用相机拍照，带EVF(电子取景器)的相机，虽然技术不怎么样，但为的就是闭上一只眼睛，咪起另一只对准取景框的那一瞬间带来的“仪式感”。有门槛的事情才值得你去做。</p>
-<p>虽然会弹的曲子不多，但给吉他换完弦以后，总要把伸出来的那部分琴弦乱糟糟的盘在琴头，越乱越好，然后把变调夹以一个不对称的角度夹在旋钮旁边，嗯，这样比较装逼。</p>
-<h3 id="为什么是独立博客？"><a href="#为什么是独立博客？" class="headerlink" title="为什么是独立博客？"></a>为什么是独立博客？</h3><p>酝酿着要弄一个自己的博客已经有些日子了，之前也想过在CSDN或是简书上搭建，但总觉的那些都不够纯粹，不够 “independent”。 最终选择了 Hexo+GitHub 的组合。然后去买了自己的顶级域名，又是一笔败家子儿的支出，回头想想，除此之外，还有每年爬梯服务，张淼的podcast，许岑的大王系列，杂七杂八的软件。</p>
-<p>肉疼。</p>
-<p>但这一切都是值得的。</p>
-<p>总的来说，我这套方案的优点如下：</p>
-<ul>
-<li><strong>简洁</strong>。你总不希望自己的博客页面上各种杂七杂八的广告乱飞吧。</li>
-<li><strong>够有范儿</strong>。拉到最上边的地址栏看看我的域名，嗯，那个就是我的名字。</li>
-<li><strong>省心</strong>。最近国内各家的网盘服务一个接一个的挂掉了，人心惶惶。要是哪天GitHub挂掉了我就在家看日出日落、刮风打雷。</li>
-<li><strong>记录</strong>。这是写博客最根本的目的，即便是现在的自己写的全是水文，但是在这个过程中自己会有所提高，相信会慢慢好起来的，希望生活会在某个时间节点上给自己意想不到的回报。</li>
-</ul>
-<h3 id="关于博客的内容"><a href="#关于博客的内容" class="headerlink" title="关于博客的内容"></a>关于博客的内容</h3><p>我的初衷是以技术性内容为主，分享一些在学习 Machine Learning, Deep Learning, Computer Vison, Natural Language Processing 过程中的困惑和心得，夹杂一些弹吉他、拍照片的小tips, 还有对生活的感悟。至于最后能做到什么程度，我自己心里也没谱。</p>
-<p>才疏学浅，就正于各位方家。</p>
-<h3 id="感谢"><a href="#感谢" class="headerlink" title="感谢"></a>感谢</h3><p>感谢 GitHub, Hexo, Node.js, GoDaddy, DNSPod, Markdown，以及如下各位在建站的过程中给予我的灵感和技术上的参考，分享让这个世界变得更美好。</p>
-<ul>
-<li><a href="http://wuchong.me" target="_blank" rel="external">http://wuchong.me</a></li>
-<li><a href="http://colah.github.io" target="_blank" rel="external">http://colah.github.io</a></li>
-<li><a href="http://ibruce.info" target="_blank" rel="external">http://ibruce.info</a></li>
-<li><a href="http://theme-next.iissnan.com" target="_blank" rel="external">http://theme-next.iissnan.com</a></li>
-</ul>
-<p>哦，对了：</p>
-<p>Hello, World!</p>
-
-          
+          <h3 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello, World!"></a>Hello, World!</h3><p>如同每个人在学习coding的时候刚开始都会在屏幕上打印出那句 “Hello, World!” 一样，其实在尝试任何新鲜的事物的伊始，都需要一个“仪式感”，以昭告天下说自己要在这个领域撒开腿儿的折腾一番。是的，我要开始写自己的独立博客啦！<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/04/Hello-World/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -709,9 +686,30 @@ x += -learning_rate * mb / (np.sqrt(vb) + eps)
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liyisong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
 
 
 
