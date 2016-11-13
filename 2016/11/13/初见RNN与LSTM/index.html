@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://github.com/yisongbetter/Markdown-Photos/raw/master/vision_task.004.jpeg">
 <meta property="og:image" content="https://github.com/yisongbetter/Markdown-Photos/raw/master/LSTM.005.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/LSTM.006.jpeg">
-<meta property="og:updated_time" content="2016-11-13T02:10:16.000Z">
+<meta property="og:updated_time" content="2016-11-13T02:45:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初见RNN与LSTM">
 <meta name="twitter:description" content="最近刚刚完成了stanford cs231n的assignment3，前半部分是用RNN与LSTM做image caption，后半部分是CNN的可视化。虽然看上去很简单的结构，真正动手实现起来发现还是有很多坑的，特别是对于我这种只知道CNN的小白.借此机会分享一下初见RNN的点点滴滴，忽然想到了句歌词XD：">
@@ -386,7 +386,7 @@
 <p>需要注意的是在整个的时间序列中所有的投影矩阵都是参数共享的，同CNN的卷积核“参数共享”和“局部视野”类似，这大大减轻了过拟合问题，所以一般我们不对RNN加正则项。但这也为我们做backward的时候埋下了坑：</p>
 <ul>
 <li>$W^{xh}$ 和 $W^{hh}$在整个时间序列里都是参数共享的，所以在反向传播的时候要把它们累加起来</li>
-<li>对$h_t$的梯度来源也有两部分，故在反向传播的时候也要把它们加起来</li>
+<li>对$h_t$的梯度来源也有两部分，一部分来自下一时刻的隐藏状态，另一部分来自当前时刻的输出，故在反向传播的时候也要把它们加起来</li>
 </ul>
 <p>为了表示清楚，贴上backward时的python代码：</p>
 <pre><code>def rnn_backward(dh, cache):
@@ -421,7 +421,7 @@
   dh0 = dprev  
   return dx, dh0, dWx, dWh, db
 </code></pre><p>Vanilla RNN的结构让我们可以很轻松的处理time sequence类型的数据，我们可以根据之前系统的输入来预测系统在当前时刻的输出，但是它问题在于我们实际很难训练出一个记忆力持久的模型，它会很快忘掉之前系统的输入，究其原因还是在反向传播时的梯度消失问题。          </p>
-<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM的全称是Long Short Term Memory networks，它就是为了解决Vanilla RNN的记忆里不持久问题而生的。它在隐藏层的基础上又构建了一个隐藏层，我们用$c$来表示，所以说隐藏层不再是简单的对输入做非线性变幻，它有了更复杂的结构，可以概括为4个门结构：input_gate:$i$、forget gate:$f$、output gate:$o$、block gate:$g$：<br>\begin{equation}\begin{split}a &amp;= W^x x^t+W^h h^{t-1}+b\\i &amp;= \sigma(a^i)\\f &amp;= \sigma(a^f)\\o &amp;= \sigma(a^o)\\g &amp;= tanh(a^g)\\c^t &amp;= f*c^{t-1}+i*g\\h^t &amp;= o*tanh(c^t)\end{split}\end{equation}</p>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM的全称是Long Short Term Memory networks，它就是为了解决Vanilla RNN的记忆力不持久问题而生的。它在隐藏层的基础上又构建了一个隐藏层，我们用$c$来表示，所以说隐藏层不再是简单的对输入做非线性变幻，它有了更复杂的结构，可以概括为4个门结构：input_gate:$i$、forget gate:$f$、output gate:$o$、block gate:$g$：<br>\begin{equation}\begin{split}a &amp;= W^x x^t+W^h h^{t-1}+b\\i &amp;= \sigma(a^i)\\f &amp;= \sigma(a^f)\\o &amp;= \sigma(a^o)\\g &amp;= tanh(a^g)\\c^t &amp;= f*c^{t-1}+i*g\\h^t &amp;= o*tanh(c^t)\end{split}\end{equation}</p>
 <p>用图画出来：</p>
 <div align="center"><br><img src="https://github.com/yisongbetter/Markdown-Photos/raw/master/vision_task.004.jpeg" width="600" alt="LSTM" align="center"><br></div>
 
