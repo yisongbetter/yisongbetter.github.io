@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://github.com/yisongbetter/Markdown-Photos/raw/master/vision_task.004.jpeg">
 <meta property="og:image" content="https://github.com/yisongbetter/Markdown-Photos/raw/master/LSTM.005.jpeg">
 <meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/LSTM.006.jpeg">
-<meta property="og:updated_time" content="2016-11-13T02:45:42.000Z">
+<meta property="og:updated_time" content="2016-11-13T02:49:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初见RNN与LSTM">
 <meta name="twitter:description" content="最近刚刚完成了stanford cs231n的assignment3，前半部分是用RNN与LSTM做image caption，后半部分是CNN的可视化。虽然看上去很简单的结构，真正动手实现起来发现还是有很多坑的，特别是对于我这种只知道CNN的小白.借此机会分享一下初见RNN的点点滴滴，忽然想到了句歌词XD：">
@@ -446,9 +446,9 @@
 <p>对于这些captions的处理方法是先建立一个词典把captions用到的词都记录到这个词典里，然后对每一个词分配一个index，然后在整个caption训练的过程中训练出针对每个词的编码向量，也就是说这里针对每一个词的编码向量都是data-dependent的。在这个assignment当中词典的维度是1004，而编码向量的维度是20。</p>
 <p>所以严格意义上来说，这并不是一套end-to-end的模型。</p>
 <h4 id="Training-and-Testing"><a href="#Training-and-Testing" class="headerlink" title="Training and Testing"></a>Training and Testing</h4><p>图片的fc7层的features是经过一个投影矩阵然后作为h0，也就是初始的隐藏层的状态。针对每一个词编码后的词向量作为系统的输入。</p>
-<p>我们的网络结构是固定的，而每张图片的caption的长度是参差不齐的，这里采取的做法是设立3个token，分别是<start>、<end>和<null>，所有的<null>都不计入损失。</null></null></end></start></p>
-<p>在训练阶段我们在t1时刻的输入总是<start>,而t1时刻输出的ground truth是当前caption的有意义的第一个词语，注意这里我们softmax的输出是一个1004维的概率向量。算完loss,求完梯度之后，t2时刻的输入是当前caption有意义的第一个词语，而t2时刻输出的ground truth是当前caption的有意义的第二个词语，以此类推。</start></p>
-<p>在测试阶段，把当前时刻的输出作为下一时刻的输入，当输出为<end>的时候就停止。</end></p>
+<p>我们的网络结构是固定的，而每张图片的caption的长度是参差不齐的，这里采取的做法是设立3个token，分别是<code>&lt;start&gt;</code>、<code>&lt;end&gt;</code>和<code>&lt;null&gt;</code>，所有的<code>&lt;null&gt;</code>都不计入损失。</p>
+<p>在训练阶段我们在t1时刻的输入总是<code>&lt;start&gt;</code>,而t1时刻输出的ground truth是当前caption的有意义的第一个词语，注意这里我们softmax的输出是一个1004维的概率向量。算完loss,求完梯度之后，t2时刻的输入是当前caption有意义的第一个词语，而t2时刻输出的ground truth是当前caption的有意义的第二个词语，以此类推。</p>
+<p>在测试阶段，把当前时刻的输出作为下一时刻的输入，当输出为<code>&lt;end&gt;</code>的时候就停止。</p>
 <p>至此，我们就可以画出整个流程图了：</p>
 <div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/LSTM.006.jpeg" width="600" alt="image_caption" align="center"><br></div>
 
