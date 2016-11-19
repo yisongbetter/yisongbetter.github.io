@@ -98,7 +98,7 @@ _在Markdown中表示斜体，而在Latex中表示下标
 _在Markdown中表示斜体，而在Latex中表示下标
 \\在Markdown中会被转义成\,而在Latex中表示换行
 **在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法">
-<meta property="og:updated_time" content="2016-11-19T09:17:36.000Z">
+<meta property="og:updated_time" content="2016-11-19T09:18:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo下mathjax的转义问题">
 <meta name="twitter:description" content="ProblemMarkdown与Latex语法不兼容问题：
@@ -357,9 +357,9 @@ _在Markdown中表示斜体，而在Latex中表示下标
 <ul>
 <li><code>_</code>在Markdown中表示斜体，而在Latex中表示下标</li>
 <li><code>\\</code>在Markdown中会被转义成<code>\</code>,而在Latex中表示换行</li>
-<li><code>**</code>在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法<a id="more"></a>
-</li>
+<li><code>**</code>在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法</li>
 </ul>
+<a id="more"></a>
 <h4 id="My-Solution"><a href="#My-Solution" class="headerlink" title="My Solution"></a>My Solution</h4><p>对于斜体，我们可以用<code>*something*</code>表示，然后修改Hexo渲染源码屏蔽掉<code>_</code>的斜体含义和<code>\\</code>的额外转义，方法如下：</p>
 <p>打开Hexo目录下的 <font color="red">nodes_modules/marked/lib/marked.js</font> 这个文件，找到下面这行代码：</p>
 <pre><code>escape: /^\\([\\`*{}\[\]()# +\-.!_&gt;])/,
