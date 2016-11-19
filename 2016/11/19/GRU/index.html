@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Yisong's Blog">
 <meta property="og:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
 <meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
-<meta property="og:updated_time" content="2016-11-19T08:07:35.000Z">
+<meta property="og:updated_time" content="2016-11-19T08:08:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GRU">
 <meta name="twitter:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
@@ -370,7 +370,7 @@
 <li>The input and forget gates are coupled by an update gate $z$ and the reset gate $r$ is applied directly to the previous hidden state. Thus, the responsibility of the reset gate in a LSTM is really split up into both $r$ and $z$</li>
 <li>We don’t apply a second nonlinearity when computing the output</li>
 </ul>
-<p>相比于LSTM，GRU在网络结构上简化了很多，这片文章<a href="https://arxiv.org/pdf/1412.3555v1.pdf" target="_blank" rel="external">Empirical Evaluation of<br>Gated Recurrent Neural Networks<br>on Sequence Modeling</a>对两者做了详细的对比，大概的结论是：</p>
+<p>相比于LSTM，GRU在网络结构上简化了很多，这片文章<a href="https://arxiv.org/pdf/1412.3555v1.pdf" target="_blank" rel="external">Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling</a>对两者做了详细的对比，大概的结论是：</p>
 <p>用相同的参数个数，在一些任务中，GRU比LSTM收敛的更快。</p>
 <h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
 <li><a href="http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/" target="_blank" rel="external">http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/</a></li>
