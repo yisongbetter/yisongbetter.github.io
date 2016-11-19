@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo,mathjax,Markdown,Latex," />
 
 
 
@@ -84,15 +84,34 @@
 
 
 
-<meta name="description" content="一拳打死一头驴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yisong's Blog">
-<meta property="og:url" content="http://liyisong.com/tags/Hello/index.html">
+<meta name="description" content="ProblemMarkdown与Latex语法不兼容问题：
+
+_在Markdown中表示斜体，而在Latex中表示下标
+\\在Markdown中会被转义成\,而在Latex中表示换行
+**在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法
+
+My Solution对于斜体，我们可以用*something*表示，然后修改Hexo渲染源码屏蔽掉_的斜体含义和\\的额外转义，方法如下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo下mathjax的转义问题">
+<meta property="og:url" content="http://liyisong.com/2016/11/19/Hexo下mathjax的转义问题/index.html">
 <meta property="og:site_name" content="Yisong's Blog">
-<meta property="og:description" content="一拳打死一头驴">
+<meta property="og:description" content="ProblemMarkdown与Latex语法不兼容问题：
+
+_在Markdown中表示斜体，而在Latex中表示下标
+\\在Markdown中会被转义成\,而在Latex中表示换行
+**在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法
+
+My Solution对于斜体，我们可以用*something*表示，然后修改Hexo渲染源码屏蔽掉_的斜体含义和\\的额外转义，方法如下">
+<meta property="og:updated_time" content="2016-11-19T09:16:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yisong's Blog">
-<meta name="twitter:description" content="一拳打死一头驴">
+<meta name="twitter:title" content="Hexo下mathjax的转义问题">
+<meta name="twitter:description" content="ProblemMarkdown与Latex语法不兼容问题：
+
+_在Markdown中表示斜体，而在Latex中表示下标
+\\在Markdown中会被转义成\,而在Latex中表示换行
+**在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法
+
+My Solution对于斜体，我们可以用*something*表示，然后修改Hexo渲染源码屏蔽掉_的斜体含义和\\的额外转义，方法如下">
 
 
 
@@ -113,10 +132,10 @@
 
 
 
-  <link rel="canonical" href="http://liyisong.com/tags/Hello/"/>
+  <link rel="canonical" href="http://liyisong.com/2016/11/19/Hexo下mathjax的转义问题/"/>
 
 
-  <title> 标签: Hello | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> Hexo下mathjax的转义问题 | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -137,7 +156,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -253,46 +272,175 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Hello
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Hexo下mathjax的转义问题
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T17:13:13+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
+                    <span itemprop="name">翔实的干货</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/Hexo下mathjax的转义问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/Hexo下mathjax的转义问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <h4 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h4><p>Markdown与Latex语法不兼容问题：</p>
+<ul>
+<li><code>_</code>在Markdown中表示斜体，而在Latex中表示下标</li>
+<li><code>\\</code>在Markdown中会被转义成<code>\</code>,而在Latex中表示换行</li>
+<li><code>**</code>在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法</li>
+</ul>
+<h4 id="My-Solution"><a href="#My-Solution" class="headerlink" title="My Solution"></a>My Solution</h4><p>对于斜体，我们可以用<code>*something*</code>表示，然后修改Hexo渲染源码屏蔽掉<code>_</code>的斜体含义和<code>\\</code>的额外转义，方法如下：</p>
+<p>打开Hexo目录下的 <font color="red">nodes_modules/marked/lib/marked.js</font> 这个文件，找到下面这行代码：</p>
+<pre><code>escape: /^\\([\\`*{}\[\]()# +\-.!_&gt;])/,
+</code></pre><p>改为：</p>
+<pre><code>escape: /^\\([`*{}\[\]()# +\-.!_&gt;])/,
+</code></pre><p>这样就去掉了<code>\\</code>的转义。</p>
+<p>然后找到：</p>
+<pre><code>em: /^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+</code></pre><p>改为：</p>
+<pre><code>em:/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+</code></pre><p>这样去掉了<code>_</code>的斜体含义。</p>
+<p>对于<code>*</code>的问题，懒惰而又愚蠢的我一直用它在Latex公式中表示点乘，结果死活编译不过，浪费了很多时间，解决办法就是用$\odot$来表示点乘，漂亮美观没歧义。 </p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a href="http://shomy.top/2016/10/22/hexo-markdown-mathjax/" target="_blank" rel="external">http://shomy.top/2016/10/22/hexo-markdown-mathjax/</a></li>
+<li><a href="http://blog.csdn.net/u014491743/article/details/51340609" target="_blank" rel="external">http://blog.csdn.net/u014491743/article/details/51340609</a>                </li>
+</ul>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/11/04/Hello-World/" itemprop="url">
-              
-                <span itemprop="name">Hello，独立博客</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-04T12:30:23+08:00"
-              content="2016-11-04" >
-          11-04
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+            <a href="/tags/mathjax/" rel="tag">#mathjax</a>
+          
+            <a href="/tags/Markdown/" rel="tag">#Markdown</a>
+          
+            <a href="/tags/Latex/" rel="tag">#Latex</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/19/GRU/" rel="next" title="GRU">
+                <i class="fa fa-chevron-left"></i> GRU
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -300,6 +448,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/19/Hexo下mathjax的转义问题/"
+           data-title="Hexo下mathjax的转义问题" data-url="http://liyisong.com/2016/11/19/Hexo下mathjax的转义问题/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -319,8 +475,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -370,6 +535,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Problem"><span class="nav-number">1.</span> <span class="nav-text">Problem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#My-Solution"><span class="nav-number">2.</span> <span class="nav-text">My Solution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -466,6 +642,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
 
   
 

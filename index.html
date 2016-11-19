@@ -277,6 +277,147 @@
             
               
                 
+                <a class="post-title-link" href="/2016/11/19/Hexo下mathjax的转义问题/" itemprop="url">
+                  Hexo下mathjax的转义问题
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T17:13:13+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
+                    <span itemprop="name">翔实的干货</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/Hexo下mathjax的转义问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/Hexo下mathjax的转义问题/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h4><p>Markdown与Latex语法不兼容问题：</p>
+<ul>
+<li><code>_</code>在Markdown中表示斜体，而在Latex中表示下标</li>
+<li><code>\\</code>在Markdown中会被转义成<code>\</code>,而在Latex中表示换行</li>
+<li><code>**</code>在Markdown中表示加粗强调,而在Latex中你可能会用它表示乘法</li>
+</ul>
+<h4 id="My-Solution"><a href="#My-Solution" class="headerlink" title="My Solution"></a>My Solution</h4><p>对于斜体，我们可以用<code>*something*</code>表示，然后修改Hexo渲染源码屏蔽掉<code>_</code>的斜体含义和<code>\\</code>的额外转义，方法如下：</p>
+<p>打开Hexo目录下的 <font color="red">nodes_modules/marked/lib/marked.js</font> 这个文件，找到下面这行代码：</p>
+<pre><code>escape: /^\\([\\`*{}\[\]()# +\-.!_&gt;])/,
+</code></pre><p>改为：</p>
+<pre><code>escape: /^\\([`*{}\[\]()# +\-.!_&gt;])/,
+</code></pre><p>这样就去掉了<code>\\</code>的转义。</p>
+<p>然后找到：</p>
+<pre><code>em: /^\b_((?:[^_]|__)+?)_\b|^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+</code></pre><p>改为：</p>
+<pre><code>em:/^\*((?:\*\*|[\s\S])+?)\*(?!\*)/,
+</code></pre><p>这样去掉了<code>_</code>的斜体含义。</p>
+<p>对于<code>*</code>的问题，懒惰而又愚蠢的我一直用它在Latex公式中表示点乘，结果死活编译不过，浪费了很多时间，解决办法就是用$\odot$来表示点乘，漂亮美观没歧义。 </p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a href="http://shomy.top/2016/10/22/hexo-markdown-mathjax/" target="_blank" rel="external">http://shomy.top/2016/10/22/hexo-markdown-mathjax/</a></li>
+<li><a href="http://blog.csdn.net/u014491743/article/details/51340609" target="_blank" rel="external">http://blog.csdn.net/u014491743/article/details/51340609</a>                </li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/11/19/GRU/" itemprop="url">
                   GRU
                 </a>
@@ -785,7 +926,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-count">5</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -802,7 +943,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
