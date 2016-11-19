@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="RNN,LSTM,GRU," />
 
 
 
@@ -84,15 +84,18 @@
 
 
 
-<meta name="description" content="一拳打死一头驴">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Yisong's Blog">
-<meta property="og:url" content="http://liyisong.com/archives/index.html">
+<meta name="description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GRU">
+<meta property="og:url" content="http://liyisong.com/2016/11/19/GRU/index.html">
 <meta property="og:site_name" content="Yisong's Blog">
-<meta property="og:description" content="一拳打死一头驴">
+<meta property="og:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
+<meta property="og:updated_time" content="2016-11-19T08:07:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yisong's Blog">
-<meta name="twitter:description" content="一拳打死一头驴">
+<meta name="twitter:title" content="GRU">
+<meta name="twitter:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
 
 
 
@@ -113,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http://liyisong.com/archives/"/>
+  <link rel="canonical" href="http://liyisong.com/2016/11/19/GRU/"/>
 
 
-  <title> 归档 | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> GRU | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -137,7 +140,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  page-archive  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -253,177 +256,184 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      嗯..! 目前共计 4 篇日志。 继续努力。
-    </span>
-
+  <div id="posts" class="posts-expand">
     
-
-      
-      
-      
-
-      
-        
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
-        </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/19/GRU/" itemprop="url">
-              
-                <span itemprop="name">GRU</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-19T14:48:42+08:00"
-              content="2016-11-19" >
-          11-19
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/13/初见RNN与LSTM/" itemprop="url">
-              
-                <span itemprop="name">初见RNN与LSTM</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-13T08:18:42+08:00"
-              content="2016-11-13" >
-          11-13
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/05/深度学习中的优化算法/" itemprop="url">
-              
-                <span itemprop="name">深度学习中的优化算法</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-05T08:07:21+08:00"
-              content="2016-11-05" >
-          11-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-      
-      
-      
-
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/11/04/Hello-World/" itemprop="url">
-              
-                <span itemprop="name">Hello，独立博客</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-11-04T12:30:23+08:00"
-              content="2016-11-04" >
-          11-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-    
-
-  </section>
 
   
+  
 
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                GRU
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-19T14:48:42+08:00" content="2016-11-19">
+              2016-11-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
+                    <span itemprop="name">翔实的干货</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/19/GRU/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/GRU/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h4><p>GRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由<a href="https://arxiv.org/pdf/1409.1259" target="_blank" rel="external">Cho, et al. (2014)</a>提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:<br><a id="more"></a></p>
+<ul>
+<li>重置门$r_t$决定了新的hidden state中上一hidden state所占的比重</li>
+<li>新的hidden state由重置门过滤后的上一hidden state$h_{t-1}$和输入$x_t$经过非线性变幻$\tanh$激活得到</li>
+<li>更新门决定了当前hidden state中新的hidden state所占的比重，控制了最后的输出$h_t$中新的hidden state和上一hidden state所占的比重</li>
+</ul>
+<p>具体的前向传播公式为：</p>
+<p>\begin{equation}\begin{split}<br>z_t &amp;= \sigma (W_z[h_{t-1}, x_t])\\<br>r_t &amp;= \sigma(W_r \odot [h_{t-1}, x_t])\\<br>\tilde{h}_t &amp;= \tanh(W \odot [h_{t-1} \odot r_t,x_t])\\<br>h_t &amp;= (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}<br>\end{split}\end{equation}</p>
+<p>用图表示：</p>
+<p><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg" width="600" alt="GRU" align="center"><br></div><br>前向传播代码如下：</p>
+<pre><code>def forward_prop_step(x, h_prev, W_x, W_h, b):
+
+  # GRU Layer
+  z_t = sigmoid(W_x[0].dot(x) + W_h[0].dot(h_prev) + b[0])
+  r_t = sigmoid(W_x[1].dot(x) + W_h[1].dot(h_prev) + b[1])
+  c_t = np.tanh(W_x[2].dot(x) + W_h[2].dot(h_prev * r_t) + b[2])
+  h_t = (np.ones_like(z_t1) - z_t) * h_prev + z_t * c_t
+
+  return h_t
+</code></pre><p>借用Google Brain的<a href="http://www.wildml.com/" target="_blank" rel="external">Denny Britz</a>大神的总结：</p>
+<p>The basic idea of using a gating mechanism to learn long-term dependencies is the same as in a LSTM, but there are a few key differences:</p>
+<ul>
+<li>A GRU has two gates, an LSTM has three gates</li>
+<li>GRUs don’t possess and internal memory $c_t$ that is different from the exposed hidden state. They don’t have the output gate that is present in LSTMs</li>
+<li>The input and forget gates are coupled by an update gate $z$ and the reset gate $r$ is applied directly to the previous hidden state. Thus, the responsibility of the reset gate in a LSTM is really split up into both $r$ and $z$</li>
+<li>We don’t apply a second nonlinearity when computing the output</li>
+</ul>
+<p>相比于LSTM，GRU在网络结构上简化了很多，这片文章<a href="https://arxiv.org/pdf/1412.3555v1.pdf" target="_blank" rel="external">Empirical Evaluation of<br>Gated Recurrent Neural Networks<br>on Sequence Modeling</a>对两者做了详细的对比，大概的结论是：</p>
+<p>用相同的参数个数，在一些任务中，GRU比LSTM收敛的更快。</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a href="http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/" target="_blank" rel="external">http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/</a></li>
+<li><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RNN/" rel="tag">#RNN</a>
+          
+            <a href="/tags/LSTM/" rel="tag">#LSTM</a>
+          
+            <a href="/tags/GRU/" rel="tag">#GRU</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/13/初见RNN与LSTM/" rel="next" title="初见RNN与LSTM">
+                <i class="fa fa-chevron-left"></i> 初见RNN与LSTM
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -431,6 +441,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/19/GRU/"
+           data-title="GRU" data-url="http://liyisong.com/2016/11/19/GRU/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -450,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -501,6 +528,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Architecture"><span class="nav-number">1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -597,11 +635,9 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
 
 
   

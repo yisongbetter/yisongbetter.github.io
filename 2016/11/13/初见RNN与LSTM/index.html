@@ -371,7 +371,7 @@
 
 <p>可以把CNN看成人的眼睛，它教会了机器怎么“看”这个世界，而下一步怎么决策，是直接关系到生产力的问题，就需要RNN了，如情感分析，机器翻译，智能问答等等，它甚至让机器学会做阅读理解、学会写诗了！安利一波可瑞师兄的<a href="http://poem.bosonnlp.com" target="_blank" rel="external">boson nlp</a>。</p>
 <h4 id="Vanilla-RNN"><a href="#Vanilla-RNN" class="headerlink" title="Vanilla RNN"></a>Vanilla RNN</h4><p>普通的RNN结构可以表示如下：</p>
-<p>\begin{equation}\begin{split}h^t &amp;= \tanh(W^{hh}h^{t-1} + W^{xh}x^t)\\y^t &amp;= W^{hy}h^t\end{split}\end{equation}</p>
+<p>\begin{equation}\begin{split}h^t &amp;= \tanh(W^{hh}h^{t-1} + W^{xh}x^t)\\\\y^t &amp;= W^{hy}h^t\end{split}\end{equation}</p>
 <p>其中各个参数解释如下：</p>
 <ul>
 <li>$h$为系统的隐藏状态，$h^t$表示系统在$t$时刻的隐藏状态，$h^{t-1}$为系统在$t-1$时刻的隐藏状态</li>
@@ -421,12 +421,12 @@
   dh0 = dprev  
   return dx, dh0, dWx, dWh, db
 </code></pre><p>Vanilla RNN的结构让我们可以很轻松的处理time sequence类型的数据，我们可以根据之前系统的输入来预测系统在当前时刻的输出，但是它问题在于我们实际很难训练出一个记忆力持久的模型，它会很快忘掉之前系统的输入，究其原因还是在反向传播时的梯度消失问题。          </p>
-<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM的全称是Long Short Term Memory networks，它就是为了解决Vanilla RNN的记忆力不持久问题而生的。它在隐藏层的基础上又构建了一个隐藏层，我们用$c$来表示，所以说隐藏层不再是简单的对输入做非线性变幻，它有了更复杂的结构，可以概括为4个门结构：input_gate:$i$、forget gate:$f$、output gate:$o$、block gate:$g$：<br>\begin{equation}\begin{split}a &amp;= W^x x^t+W^h h^{t-1}+b\\i &amp;= \sigma(a^i)\\f &amp;= \sigma(a^f)\\o &amp;= \sigma(a^o)\\g &amp;= tanh(a^g)\\c^t &amp;= f*c^{t-1}+i*g\\h^t &amp;= o*tanh(c^t)\end{split}\end{equation}</p>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM的全称是Long Short Term Memory networks，它就是为了解决Vanilla RNN的记忆力不持久问题而生的。它在隐藏层的基础上又构建了一个隐藏层，我们用$c$来表示，所以说隐藏层不再是简单的对输入做非线性变幻，它有了更复杂的结构，可以概括为4个门结构：input_gate:$i$、forget gate:$f$、output gate:$o$、block gate:$g$：<br>\begin{equation}\begin{split}a &amp;= W^x x^t+W^h h^{t-1}+b\\\\i &amp;= \sigma(a^i)\\\\f &amp;= \sigma(a^f)\\\\o &amp;= \sigma(a^o)\\\\g &amp;= tanh(a^g)\\\\c^t &amp;= f*c^{t-1}+i*g\\\\h^t &amp;= o*tanh(c^t)\end{split}\end{equation}</p>
 <p>用图画出来：</p>
 <div align="center"><br><img src="https://github.com/yisongbetter/Markdown-Photos/raw/master/vision_task.004.jpeg" width="600" alt="LSTM" align="center"><br></div>
 
 <p>我画的这张图把整个的网络结构表现的非常清楚了，不同的颜色代表不同的门，其中的＊和＋都是element-wise的操作。需要注意的是每个门的输入中的W和b都是不同的，关于每个门对输入数据做了什么操可以参考<a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">Understanding LSTM Networks</a>。还有就是看到sigmoid和tanh这两个函数自然而然就会想到的小trick，划重点啦，当、当、当，敲黑板：</p>
-<p>\begin{equation}\begin{split}y &amp;= \sigma(x)\\\frac{dy}{dx} &amp;= y(1-y)\end{split}\end{equation}<br>和:<br>\begin{equation}\begin{split}y &amp;= \tanh(x)\\\frac{dy}{dx} &amp;= 1-y^2\end{split}\end{equation}</p>
+<p>\begin{equation}\begin{split}y &amp;= \sigma(x)\\\\\frac{dy}{dx} &amp;= y(1-y)\end{split}\end{equation}<br>和:<br>\begin{equation}\begin{split}y &amp;= \tanh(x)\\\\\frac{dy}{dx} &amp;= 1-y^2\end{split}\end{equation}</p>
 <p>如果有人问我在RNN中为什么选这两个作为非线性激活函数，我一定回答他说因为计算方便啊，这得省掉了多少计算量！</p>
 <h3 id="Image-Caption"><a href="#Image-Caption" class="headerlink" title="Image Caption"></a>Image Caption</h3><p>关于image caption这个topic在最近的两年前后脚发表了如下的work，老司机可以直接去读paper了：</p>
 <ul>
@@ -505,6 +505,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/11/19/GRU/" rel="prev" title="GRU">
+                GRU <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -575,7 +579,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -592,7 +596,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
