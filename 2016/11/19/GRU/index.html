@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Yisong's Blog">
 <meta property="og:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
 <meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
-<meta property="og:updated_time" content="2016-11-19T08:10:16.000Z">
+<meta property="og:updated_time" content="2016-11-19T09:23:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GRU">
 <meta name="twitter:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
@@ -350,7 +350,7 @@
 <li>更新门决定了当前hidden state中新的hidden state所占的比重，控制了最后的输出$h_t$中新的hidden state和上一hidden state所占的比重</li>
 </ul>
 <p>具体的前向传播公式为：</p>
-<p>\begin{equation}\begin{split}<br>z_t &amp;= \sigma (W_z[h_{t-1}, x_t])\\<br>r_t &amp;= \sigma(W_r \odot [h_{t-1}, x_t])\\<br>\tilde{h}_t &amp;= \tanh(W \odot [h_{t-1} \odot r_t,x_t])\\<br>h_t &amp;= (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}<br>\end{split}\end{equation}</p>
+<p>\begin{equation}\begin{split}<br>z_t &amp;= \sigma (W_z[h_{t-1}, x_t])\\<br>r_t &amp;= \sigma(W_r \odot [h_{t-1}, x_t])\\<br>\tilde{h}_t &amp;= \tanh(W \odot [h_{t-1} \odot r_t,x_t])\\<br>h_t &amp;= (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t<br>\end{split}\end{equation}</p>
 <p>用图表示：</p>
 <p><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg" width="600" alt="GRU" align="center"><br></div><br>前向传播代码如下：</p>
 <pre><code>def forward_prop_step(x, h_prev, W_x, W_h, b):
