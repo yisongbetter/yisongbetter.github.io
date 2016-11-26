@@ -1,0 +1,767 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Deep Learning,CNN,PCA Whitening,Regulization," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="Our task is to evaluate network design choices and hyper-parameter settings.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tricks in Deep Neural Networks">
+<meta property="og:url" content="http://liyisong.com/2016/11/27/Tricks-in-Deep-Neural-Networks/index.html">
+<meta property="og:site_name" content="Yisong's Blog">
+<meta property="og:description" content="Our task is to evaluate network design choices and hyper-parameter settings.">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.001.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.002.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.003.jpeg">
+<meta property="og:updated_time" content="2016-11-26T19:18:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tricks in Deep Neural Networks">
+<meta name="twitter:description" content="Our task is to evaluate network design choices and hyper-parameter settings.">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.001.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liyisong.com/2016/11/27/Tricks-in-Deep-Neural-Networks/"/>
+
+
+  <title> Tricks in Deep Neural Networks | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yisong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'v1Dyyxb3Zjr6GdnbmbaM','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Tricks in Deep Neural Networks
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-27T02:49:32+08:00" content="2016-11-27">
+              2016-11-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
+                    <span itemprop="name">翔实的干货</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/27/Tricks-in-Deep-Neural-Networks/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/27/Tricks-in-Deep-Neural-Networks/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Our task is to evaluate network design choices and hyper-parameter settings.<br><a id="more"></a></p>
+<h4 id="List-explicitly-the-hyper-parameter-space-we-would-like-to-explore"><a href="#List-explicitly-the-hyper-parameter-space-we-would-like-to-explore" class="headerlink" title="List explicitly the hyper-parameter space we would like to explore"></a>List explicitly the hyper-parameter space we would like to explore</h4><p>Here is a table which summerized all the hyper-parameters we need to evaluate:</p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.001.jpeg" width="600" alt="hyper-parameter" align="center"><br></div>
+
+<h4 id="Evaluate-on-smaller-scale-images-if-possible"><a href="#Evaluate-on-smaller-scale-images-if-possible" class="headerlink" title="Evaluate on smaller scale images, if possible"></a>Evaluate on smaller scale images, if possible</h4><p>In ImageNet training process, we often rescale the original image to 256xN, then crop a random 224x224 square image </p>
+<h4 id="Do-coordinate-descent-for-hyper-parameters-and-design-choices"><a href="#Do-coordinate-descent-for-hyper-parameters-and-design-choices" class="headerlink" title="Do coordinate descent for hyper-parameters and design choices"></a>Do coordinate descent for hyper-parameters and design choices</h4><p>In general, we have several tragedies:</p>
+<ul>
+<li>Grid search on log-space</li>
+<li>Random search</li>
+<li>Just pretend that these hyper-parameters are independent of each other</li>
+</ul>
+<p>In most cases, random search is an more efficient way, cause there are only a few hyper-parameters truly matters.</p>
+<p>Learning rate decay is also important.</p>
+<h4 id="Data-augmentation"><a href="#Data-augmentation" class="headerlink" title="Data augmentation"></a>Data augmentation</h4><p>There are many ways to do data augmentation, such as horizontally flipping, random crops and affine transformations, our goal is to maximum the invariance property of our net works, there is a special method worth being mentioned: supervised data augmentation</p>
+<h5 id="Supervised-data-augmentation-SDA"><a href="#Supervised-data-augmentation-SDA" class="headerlink" title="Supervised data augmentation (SDA)"></a>Supervised data augmentation (SDA)</h5><p>HIKVISION shared some emperical experience when they won the 1-st place in ImageNet scene classification competation:</p>
+<ol>
+<li>train a model from scratch (coarse model)</li>
+<li>use coarse model to generate ground truth class activation</li>
+<li>randomly select a location based on probaility of target class</li>
+<li>map this location to original image</li>
+<li>randomly select a crop enter near that location in original image </li>
+</ol>
+<p>From my perspective, the methodology of SDA is kind of like CNN based image saliency map, we first pretrain a coarse model to supervised select our input to retrain a formal model.</p>
+<h4 id="Organize-your-code-to-allow-fast-prototyping-and-evaluation"><a href="#Organize-your-code-to-allow-fast-prototyping-and-evaluation" class="headerlink" title="Organize your code to allow fast prototyping and evaluation"></a>Organize your code to allow fast prototyping and evaluation</h4><h4 id="Data-pre-processing"><a href="#Data-pre-processing" class="headerlink" title="Data pre-processing"></a>Data pre-processing</h4><p>To make sure that different input features be of approximately equal importance to learning algorithm, we have to scale different input features. The simpliest approach to do data pre-processing is zero-center the data, and then normalize them :</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">x -= np.mean(x, axis = <span class="number">0</span>) <span class="comment"># zero center </span></div><div class="line">x /= np.std(x, axis = <span class="number">0</span>) <span class="comment"># normalize</span></div></pre></td></tr></table></figure>
+<p>It is worth mentioning that all the operations are applied on the feature dimension. </p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.002.jpeg" width="600" alt="valinna_pre" align="center"><br></div>    
+
+<p>Another pre-processing approch is PCA Whitening:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">x -= np.mean(x, axis = <span class="number">0</span>) <span class="comment"># zero center</span></div><div class="line">cov = np.dot(x.T, x)/x.shape(<span class="number">0</span>) <span class="comment"># compute the covariance matrix</span></div><div class="line">U,S,V = np.linalg.svd(cov) <span class="comment"># compute the svd of factorization of data covariance matrix</span></div><div class="line">x_rot = np.dot(x,U) <span class="comment"># decorrelate the data</span></div><div class="line">x_white = x_rot/np.sqrt(S + eps) <span class="comment"># whitening--divide by eigenvalues (which are square roots of singular values)</span></div></pre></td></tr></table></figure>
+<p>Note that the covariance matrix tells us about the correlation structure in the data, it is a SPD(symmetric positive definate) matrix, we decorrelated the data by project it to the eigen basis, the eigen value is the variance,  the last transformation is whitening which take the data in eigen basis and and divide every dimension by the eigenvalue to normalize the scale. it add a small value eps (we usually take 1e-5) to prevent division by zero, but it may greatly exaggerate the noise in the data, since it stretches all dimensions to be of equal size in the input since the irrelevant dimensions of tiny variance are  mostly noises, we can mitigate by stronger smoothing.</p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/CNN_tricks.003.jpeg" width="600" alt="PCA_Whitening" align="center"><br></div>    
+
+<p>In practice we do not use PCA whitening in CNNs, cause it cost lots of computation resources.</p>
+<h4 id="Initializations"><a href="#Initializations" class="headerlink" title="Initializations"></a>Initializations</h4><h5 id="Initialization-with-small-random-numbers"><a href="#Initialization-with-small-random-numbers" class="headerlink" title="Initialization with small random numbers"></a>Initialization with small random numbers</h5><p>Firstly, all zero initialization can not make it, cause if every neuron in the network computes the same output, they will also compute the same gradients during the back-propagation and undergo the same parameter updates.</p>
+<p>There is no source of asymmetry between neurons if their weights are initialized to be the same.</p>
+<p>To break the symmetry, we random these neurons to small numbers which are very close to zero, a good choice is unit standard deviation gaussian:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">W = <span class="number">0.01</span> * np.random.randn(D, H)</div></pre></td></tr></table></figure>
+<h5 id="Calibrating-the-variances-with-1-sqrt-n"><a href="#Calibrating-the-variances-with-1-sqrt-n" class="headerlink" title="Calibrating the variances with 1/sqrt(n)"></a>Calibrating the variances with 1/sqrt(n)</h5><p>One problem with the above suggestion is that the distribution of the outputs from a randomly initialized neuron has a variance that grows with the number of inputs. It turns out that we can normalize the variance of each neuron’s output to 1 by scaling its weight vector by the square root of its fan-in (i.e. its number of inputs). That is, the recommended heuristic is to initialize each neuron’s weight vector as:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">w = np.random.randn(n) * sqrt(<span class="number">2.0</span>/n)</div></pre></td></tr></table></figure>
+<p>Where n is the number of its inputs. This ensures that all neurons in the network initially have approximately the same output distribution and empirically improves the rate of convergence.</p>
+<h4 id="Choice-of-Activation-Functions"><a href="#Choice-of-Activation-Functions" class="headerlink" title="Choice of Activation Functions"></a>Choice of Activation Functions</h4><h5 id="Sigmoid"><a href="#Sigmoid" class="headerlink" title="Sigmoid"></a>Sigmoid</h5><p>The sigmoid function has seen frequent use historically. It takes a real-valued number and “squashes” it into range between 0 and 1. In particular, large negative numbers become 0 and large positive numbers become 1.</p>
+<p>In practice, the sigmoid non-linearity has recently fallen out of favor and it is rarely ever used. It has two major drawbacks:</p>
+<ol>
+<li>Sigmoids saturate and kill gradients,A very bad property of the sigmoid neuron is that when the neuron’s activation saturates at either tail of 0 or 1, the gradient at these regions is almost zero. Recall that during back-propagation, this (local) gradient will be multiplied to the gradient of this gate’s output for the whole objective. Therefore, if the local gradient is very small, it will effectively “kill” the gradient and almost no signal will flow through the neuron to its weights and recursively to its data.</li>
+<li>Sigmoid outputs are not zero-centered. This has implications on the dynamics during gradient descent, because if the data coming into a neuron is always positive (e.g., $x&gt;0$ element wise in $f=w^Tx+b$), then the gradient on the weights w will during back-propagation become either all be positive, or all negative (depending on the gradient of the whole expression $f$. This could introduce undesirable zig-zagging dynamics in the gradient updates for the weights. </li>
+</ol>
+<h5 id="Tanh"><a href="#Tanh" class="headerlink" title="Tanh"></a>Tanh</h5><p>The tanh non-linearity squashes a real-valued number to the range [-1, 1]. Like the sigmoid neuron, its activations saturate, but unlike the sigmoid neuron its output is zero-centered. Therefore, in practice the tanh non-linearity is always preferred to the sigmoid nonlinearity.</p>
+<h5 id="Rectified-Linear-Unit"><a href="#Rectified-Linear-Unit" class="headerlink" title="Rectified Linear Unit"></a>Rectified Linear Unit</h5><p>The Rectified Linear Unit (ReLU) has become very popular in the last few years. It computes the function $f(x)=max(0,x)$, which is simply thresholded at zero.</p>
+<ol>
+<li>(pros) The ReLU can be implemented by simply thresholding a matrix of activations at zero. Meanwhile, ReLUs does not suffer from saturating.</li>
+<li>(pros) Due to its linear, non-saturating form, it greatly accelerate the convergence of stochastic gradient descent compared to the sigmoid/tanh functions</li>
+<li>(cons) The ReLU units can irreversibly die during training. For example, a large gradient flowing through a ReLU neuron could cause the weights to update in such a way that the neuron will never activate on any datapoint again. If this happens, then the gradient flowing through the unit will forever be zero from that point on. </li>
+</ol>
+<h5 id="Leaky-ReLU"><a href="#Leaky-ReLU" class="headerlink" title="Leaky ReLU"></a>Leaky ReLU</h5><p>Leaky RuLUs are one attempt to fix the dying ReLU problem. Instead of the function being zero when $x&lt;0$, a leaky ReLU will instead have a small negative slope. That is, the function computes $f(x)=\alpha x$ if $x&lt;0$ and $f(x)=x$ if $x\ge 0$, where $\alpha$ is a small constant. </p>
+<h5 id="Parametric-ReLU-and-Randomized-ReLU"><a href="#Parametric-ReLU-and-Randomized-ReLU" class="headerlink" title="Parametric ReLU and Randomized ReLU"></a>Parametric ReLU and Randomized ReLU</h5><p>Both of them belongs to rectified unit family, for PReLU, $\alpha$ is learned and for Leaky ReLU $\alpha$ is fixed. For RReLU, $\alpha$ is a random variable keeps sampling in a given range, and remains fixed in testing.</p>
+<p>In conclusion, three types of ReLU variants all consistently outperform the original ReLU in these three data sets. And PReLU and RReLU seem better choices.</p>
+<h4 id="Regulizations"><a href="#Regulizations" class="headerlink" title="Regulizations"></a>Regulizations</h4><p>There are several ways of controlling the capacity of Neural Networks to prevent overfitting:</p>
+<h5 id="L1-and-L2-regulization"><a href="#L1-and-L2-regulization" class="headerlink" title="L1 and L2 regulization"></a>L1 and L2 regulization</h5><p>The L1 regulization can be implemented by penalizing the squared magnitude of all parameters directly in the objective and it has the intuitive interpretation of heavily penalizing peaky weight vectors and preferring diffuse weight vectors.</p>
+<p>The L1 regularization can be implemented by adding the term $\lambda |w|$ to the objective and it has the intriguing property that it leads the weight vectors to become sparse during optimization. Neurons with L1 regularization end up using only a sparse subset of their most important inputs and become nearly invariant to the “noisy” inputs.</p>
+<h5 id="Max-norm-constrains"><a href="#Max-norm-constrains" class="headerlink" title="Max norm constrains"></a>Max norm constrains</h5><p>Another form of regularization is to enforce an absolute upper bound on the magnitude of the weight vector for every neuron. In practice, this corresponds to performing the parameter update as normal, and then enforcing the constraint by clamping the weight vector $w$ of every neuron to satisfy $||w||_2&lt;c$. Typical values of c are on orders of 3 or 4. </p>
+<p>One of its appealing properties is that network cannot “explode” even when the learning rates are set too high because the updates are always bounded.</p>
+<h5 id="Dropout"><a href="#Dropout" class="headerlink" title="Dropout"></a>Dropout</h5><p>Dropout is an extremely effective, simple and recently introduced regularization technique by <a href="http://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf" target="_blank" rel="external">Srivastava et al</a>that complements the other methods (L1, L2, maxnorm).</p>
+<p>During training, dropout can be interpreted as sampling a Neural Network within the full Neural Network, and only updating the parameters of the sampled network based on the input data.</p>
+<p>During testing there is no dropout applied, with the interpretation of evaluating an averaged prediction across the exponentially-sized ensemble of all sub-networks.</p>
+<p>In practice, the value of dropout ratio p=0.5 is a reasonable default, but this can be tuned on validation data.</p>
+<p>Here is the code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="string">""" </span></div><div class="line">Inverted Dropout: Recommended implementation example.</div><div class="line">We drop and scale at train time and don't do anything at test time.</div><div class="line">"""</div><div class="line"></div><div class="line">p = <span class="number">0.5</span> <span class="comment"># probability of keeping a unit active. higher = less dropout</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># forward pass for example 3-layer neural network</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1)</div><div class="line">  U1 = (np.random.rand(*H1.shape) &lt; p) / p <span class="comment"># first dropout mask. Notice /p!</span></div><div class="line">  H1 \*= U1 <span class="comment"># drop!</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  U2 = (np.random.rand(\*H2.shape) &lt; p) / p <span class="comment"># second dropout mask. Notice /p!</span></div><div class="line">  H2 *= U2 <span class="comment"># drop!</span></div><div class="line">  out = np.dot(W3, H2) + b3</div><div class="line">  </div><div class="line">  <span class="comment"># backward pass: compute gradients... (not shown)</span></div><div class="line">  <span class="comment"># perform parameter update... (not shown)</span></div><div class="line">  </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict</span><span class="params">(X)</span>:</span></div><div class="line">  <span class="comment"># ensembled forward pass</span></div><div class="line">  H1 = np.maximum(<span class="number">0</span>, np.dot(W1, X) + b1) <span class="comment"># no scaling necessary</span></div><div class="line">  H2 = np.maximum(<span class="number">0</span>, np.dot(W2, H1) + b2)</div><div class="line">  out = np.dot(W3, H2) + b3</div></pre></td></tr></table></figure>
+<h4 id="Ensemble-method"><a href="#Ensemble-method" class="headerlink" title="Ensemble method"></a>Ensemble method</h4><p>In machine learning, ensemble methods that train multiple learners and then combine them for use are a kind of state-of-the-art learning approach. It is well known that an ensemble is usually significantly more accurate than a single learner, and ensemble methods have already achieved great success in many real-world tasks.</p>
+<p>Here are some ensemble approch usually used in the deep learning scenario:</p>
+<ul>
+<li>Same model, different initialization. Use cross-validation to determine the best hyperparameters, then train multiple models with the best set of hyperparameters but with different random initialization.</li>
+<li>Top models discovered during cross-validation. Use cross-validation to determine the best hyperparameters, then pick the top few (e.g., 10) models to form the ensemble.</li>
+<li>Different checkpoints of a single model. If training is very expensive, we can taking different checkpoints of a single network over time (for example after every epoch) and using those to form an ensemble. The advantage of this approach is that is very cheap.</li>
+</ul>
+<h4 id="Some-words"><a href="#Some-words" class="headerlink" title="Some words"></a>Some words</h4><p>If you see these words, you are definitly my friends, and I want share a great experience happened on me today.</p>
+<p>A couple of friends come to my dormitory, and we plan to play badminton in the gym, we I had to borrow some cards to get access to the gym, so I called some of my classmates for it, and almost all of them came over to give their cards to me themselves, I never thought you guys treat me so well.</p>
+<p>I want mark their name in my blog: Zhu Kang, Chen Siye, Bi Fan, Meng Dongyu.</p>
+<p>I am not a sentiment guy, but I love you guys:)  </p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
+<li><a href="http://lamda.nju.edu.cn/weixs/?AspxAutoDetectCookieSupport=1" target="_blank" rel="external">http://lamda.nju.edu.cn/weixs/?AspxAutoDetectCookieSupport=1</a></li>
+<li><a href="http://cs231n.github.io" target="_blank" rel="external">http://cs231n.github.io</a> </li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learning/" rel="tag">#Deep Learning</a>
+          
+            <a href="/tags/CNN/" rel="tag">#CNN</a>
+          
+            <a href="/tags/PCA-Whitening/" rel="tag">#PCA Whitening</a>
+          
+            <a href="/tags/Regulization/" rel="tag">#Regulization</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/19/Hexo下mathjax的转义问题/" rel="next" title="Hexo下mathjax的转义问题">
+                <i class="fa fa-chevron-left"></i> Hexo下mathjax的转义问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/27/Tricks-in-Deep-Neural-Networks/"
+           data-title="Tricks in Deep Neural Networks" data-url="http://liyisong.com/2016/11/27/Tricks-in-Deep-Neural-Networks/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="LiYisong" />
+          <p class="site-author-name" itemprop="name">LiYisong</p>
+          <p class="site-description motion-element" itemprop="description">谁活着未靠感觉做人才可悲</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#List-explicitly-the-hyper-parameter-space-we-would-like-to-explore"><span class="nav-number">1.</span> <span class="nav-text">List explicitly the hyper-parameter space we would like to explore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evaluate-on-smaller-scale-images-if-possible"><span class="nav-number">2.</span> <span class="nav-text">Evaluate on smaller scale images, if possible</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Do-coordinate-descent-for-hyper-parameters-and-design-choices"><span class="nav-number">3.</span> <span class="nav-text">Do coordinate descent for hyper-parameters and design choices</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-augmentation"><span class="nav-number">4.</span> <span class="nav-text">Data augmentation</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Supervised-data-augmentation-SDA"><span class="nav-number">4.1.</span> <span class="nav-text">Supervised data augmentation (SDA)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Organize-your-code-to-allow-fast-prototyping-and-evaluation"><span class="nav-number">5.</span> <span class="nav-text">Organize your code to allow fast prototyping and evaluation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Data-pre-processing"><span class="nav-number">6.</span> <span class="nav-text">Data pre-processing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Initializations"><span class="nav-number">7.</span> <span class="nav-text">Initializations</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Initialization-with-small-random-numbers"><span class="nav-number">7.1.</span> <span class="nav-text">Initialization with small random numbers</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Calibrating-the-variances-with-1-sqrt-n"><span class="nav-number">7.2.</span> <span class="nav-text">Calibrating the variances with 1/sqrt(n)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Choice-of-Activation-Functions"><span class="nav-number">8.</span> <span class="nav-text">Choice of Activation Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Sigmoid"><span class="nav-number">8.1.</span> <span class="nav-text">Sigmoid</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tanh"><span class="nav-number">8.2.</span> <span class="nav-text">Tanh</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Rectified-Linear-Unit"><span class="nav-number">8.3.</span> <span class="nav-text">Rectified Linear Unit</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Leaky-ReLU"><span class="nav-number">8.4.</span> <span class="nav-text">Leaky ReLU</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Parametric-ReLU-and-Randomized-ReLU"><span class="nav-number">8.5.</span> <span class="nav-text">Parametric ReLU and Randomized ReLU</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Regulizations"><span class="nav-number">9.</span> <span class="nav-text">Regulizations</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#L1-and-L2-regulization"><span class="nav-number">9.1.</span> <span class="nav-text">L1 and L2 regulization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Max-norm-constrains"><span class="nav-number">9.2.</span> <span class="nav-text">Max norm constrains</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dropout"><span class="nav-number">9.3.</span> <span class="nav-text">Dropout</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ensemble-method"><span class="nav-number">10.</span> <span class="nav-text">Ensemble method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Some-words"><span class="nav-number">11.</span> <span class="nav-text">Some words</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">12.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiYisong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liyisong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
