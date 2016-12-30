@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="RNN,LSTM,GRU,Deep Learning," />
+  <meta name="keywords" content="2016,年终总结," />
 
 
 
@@ -84,18 +84,26 @@
 
 
 
-<meta name="description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
+<meta name="description" content="今天是2016年的最后一天，看着身边人的各种晒幸福，晒期许。深夜突然回想起自己的2016，竟没一件让自己满意的事情浮上脑海，惊醒，四顾茫然，不知所措。
+掀开窗帘，室外是4度无风的夜晚，华夏西路上的行车零零散散，想说点什么，但空气应该听不懂我的话吧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GRU">
-<meta property="og:url" content="http://liyisong.com/2016/11/19/GRU/index.html">
+<meta property="og:title" content="回见，2016">
+<meta property="og:url" content="http://liyisong.com/2016/12/31/回见，2016/index.html">
 <meta property="og:site_name" content="Yisong's Blog">
-<meta property="og:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
-<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
-<meta property="og:updated_time" content="2016-11-20T05:50:15.000Z">
+<meta property="og:description" content="今天是2016年的最后一天，看着身边人的各种晒幸福，晒期许。深夜突然回想起自己的2016，竟没一件让自己满意的事情浮上脑海，惊醒，四顾茫然，不知所措。
+掀开窗帘，室外是4度无风的夜晚，华夏西路上的行车零零散散，想说点什么，但空气应该听不懂我的话吧。">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.001.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.002.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.003.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.004.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.005.jpeg">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.006.jpeg">
+<meta property="og:updated_time" content="2016-12-30T21:45:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GRU">
-<meta name="twitter:description" content="ArchitectureGRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由Cho, et al. (2014)提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg">
+<meta name="twitter:title" content="回见，2016">
+<meta name="twitter:description" content="今天是2016年的最后一天，看着身边人的各种晒幸福，晒期许。深夜突然回想起自己的2016，竟没一件让自己满意的事情浮上脑海，惊醒，四顾茫然，不知所措。
+掀开窗帘，室外是4度无风的夜晚，华夏西路上的行车零零散散，想说点什么，但空气应该听不懂我的话吧。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.001.jpeg">
 
 
 
@@ -116,10 +124,10 @@
 
 
 
-  <link rel="canonical" href="http://liyisong.com/2016/11/19/GRU/"/>
+  <link rel="canonical" href="http://liyisong.com/2016/12/31/回见，2016/"/>
 
 
-  <title> GRU | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> 回见，2016 | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +285,7 @@
             
             
               
-                GRU
+                回见，2016
               
             
           </h1>
@@ -289,8 +297,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-19T14:48:42+08:00" content="2016-11-19">
-              2016-11-19
+            <time itemprop="dateCreated" datetime="2016-12-31T05:32:33+08:00" content="2016-12-31">
+              2016-12-31
             </time>
           </span>
 
@@ -303,8 +311,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
-                    <span itemprop="name">翔实的干货</span>
+                  <a href="/categories/生活感悟/" itemprop="url" rel="index">
+                    <span itemprop="name">生活感悟</span>
                   </a>
                 </span>
 
@@ -319,8 +327,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/11/19/GRU/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/19/GRU/" itemprop="commentsCount"></span>
+                <a href="/2016/12/31/回见，2016/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/31/回见，2016/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -343,31 +351,44 @@
       
 
       
-        <h4 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h4><p>GRU是Gated Recurrent Unit的缩写，是现在非常流行的一种LSTM的变体。由<a href="https://arxiv.org/pdf/1409.1259" target="_blank" rel="external">Cho, et al. (2014)</a>提出，它将LSTM中的cell state和hidden进行了合并，将原来的三个门替换为了更新门$z_t$和重置门$r_t$，其中:<br><a id="more"></a></p>
+        <p>今天是2016年的最后一天，看着身边人的各种晒幸福，晒期许。深夜突然回想起自己的2016，竟没一件让自己满意的事情浮上脑海，惊醒，四顾茫然，不知所措。</p>
+<p>掀开窗帘，室外是4度无风的夜晚，华夏西路上的行车零零散散，想说点什么，但空气应该听不懂我的话吧。<br> <a id="more"></a></p>
+<h4 id="圣诞"><a href="#圣诞" class="headerlink" title="圣诞"></a>圣诞</h4><p>没错，一如既往的把圣诞节过成了圣诞结，还好张淼把Easytime TV的上海线下趴定在了这一天，中国Apple教父，神交已久，终于得见。<br>第一次听说张淼，是4年前的友的聊播客上，他和jailbreakhum还有友藏、Jaxlee聊的iphone的越狱和正版软件的话题，现在想想那档podcast的开头，小野丽莎的cachito前奏响起，仿佛又回到了大学二年级，欢快、懒散、下午、阳光、逃课、姑娘。</p>
+<blockquote>
+<p>Hello, 大家好，这里是友的聊播客，朋友的友，白勺的，聊天的聊，是一档友藏和朋友们聊天的播客节目，今天的主题是……</p>
+</blockquote>
+<p>这是一档深刻影响了我三观的节目，每次听完后脑袋都想被劈了一样，我草，这个世界上竟然有这么一群人以这种状态生活着。说的矫情一点，它让我明白了人生不只有学生时代的苟且，还有诗与远方。</p>
+<p>去年去过一次友的聊的线下聚会，在北京，傻乎乎的我买了早上的机票，延误，落地后party已经开了一半，结束后又匆忙忙的飞回了上海。这次的聚会在家门口，闲庭信步的多。</p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.001.jpeg" width="600" alt="淼哥" align="center"><br></div><br>这是淼哥第一次也可能是最后一次组织这种形式的线下趴，主题是“把兴趣变成事业”，和猜想中的八九不离十，生活中的他是个柔情铁汉，self-motivated、curiousity－driven。现在是个超级奶爸的同时，依然为自己的梦想执着付出，实乃我辈楷模。<br><br>多希望自己以后能像他一样，照顾一家老小，头顶天、脚着地。<br><br>另人生中第一次喝到了Espresso，贼特么苦。<br><br>#### Brother<br>#####康叔<br>一直觉得自己是一个慢热、不太好相处的人，这一年下来，身边的朋友基本上还是那些。<br>12月22号是康叔29岁生日，这个倔强的男人本科北理工毕业工作4年后脑子起泡又来读研，本出国内CV届某大牛，而后又转投国内某VR大牛，现在的理想是出国读cs的博士，精彩精彩。同样脑子起泡的6个人为他买了这款超级巨无霸蛋糕，还点了根蜡烛。这是一群拥有国内最好的教育资源，却满地吐槽，逼迫自己变得更好的疯子。<br><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.002.jpeg" width="600" alt="康叔" align="center"><br></div><br>那一晚上，大家撸了烤串、喝了点酒，说了些胡话。<br>##### 东东<br>东东同学由于显赫的学历背景，和过人的智商一直鹤立鸡群，在学校一直都是神秘的传说级别的人物，整个学校应该只有我跟他接触比较多。因为他是我室友。<br><br>本科毕业于国内最牛逼的高校的他平日里沉默寡言，小寸头，爱踢球、爱相声、可乐的相声：）<br><br>但是可能是由于老家在同一个地方，我俩出奇的有很多共同语言，深夜一起怼红警、我聊他听不懂的武侠、他聊我不懂行的相声、一起弹唱Beatles的”Let it be”<br><br>小哥，神剑八雄你知道是哪八个不？<br><br>&gt; When I find myself in times of trouble<br>&gt;<br>&gt; Mother Mary comes to me<br>&gt;<br>&gt; Speaking words of wisdom<br>&gt;<br>&gt;Let it be<br><br>当开始一反常态的扯闲篇的时候，我们默契的知道，他可能生活中遇到了点麻烦，但是从老不直接问，一个丢包袱，另一个捡包袱。<br><br>#### 种草<br>这一年正事没干几件，草又给种下了：<br><br>一件是爱尔兰的手工吉他Lowden的沉水红红杉的前面板＋东非黑檀的手工吉他，大概是长这个样子的：<br><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.003.jpeg" width="600" alt="Lowden" align="center"><br></div>    
+
+<p>另外一件是莱卡的一款镜头，第三代夜神 Noctilous 50mm f0.95，人类光学历史上的传奇，大概是长这个样子的：</p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.004.jpeg" width="600" alt="GRU" align="center"><br></div><br>我也问过自己，为啥会喜欢这种缥缈的东西，借用Camlogic闫伟的一段话：<br><br>&gt;在消费行为研究中，非理性是一个重要的话题<br><br>&gt;并不是说我们应该去当傻子<br><br>&gt;但这确实说明我们大脑远不是什么精密运作的仪器<br><br>&gt;而说到我们周遭的环境，我们所在的这个世界<br><br>&gt;如果扯的远一些，甚至可以说到测不准定理和那只不知道是死是活的猫<br><br>&gt;我们这个世界参差百态，精彩异常，就是因为它是不确定的<br><br>&gt;你没办法用一套理论去套用所有<br><br>&gt;于是，在这大千世界中，有我们这么一群花钱去买不解决温饱、不解决个人问题的相机、镜头的人<br><br>&gt;而在这些相机、镜头中，又有这么一枚追求极致的家伙<br><br>&gt;生活真美好<br><br>附上一张这枚镜头出的片儿：<br><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.005.jpeg" width="600" alt="夜色" align="center"><br></div>    
+
+<p>那种棉絮般的焦外虚化真他娘的毒。</p>
+<h4 id="剧"><a href="#剧" class="headerlink" title="剧"></a>剧</h4><p>有几部不得不提的剧在这一年里留下了深刻印象：<br>上野树里和香取甚吾的“家族的形式”，又一部治愈系的暖片儿，总觉得日剧都一个风格，这部尤其极致。几个月前我在instagram上写下：</p>
+<p><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/2016.006.jpeg" width="600" alt="家族" align="center"><br></div><br>最近豆瓣刚评出了年度最佳，最佳国语片是驴得水，最佳外语片是血战钢锯岭，和我想的一毛一样，真想再去电影院看一遍。</p>
+<h4 id="激动"><a href="#激动" class="headerlink" title="激动"></a>激动</h4><p>非常庆幸自己作为一名lobby boy也参与了实验室spark高光谱卫星的相关工作，老板带领团队要搞一个光谱中国，大概就是基于spark卫星拍摄的全国境内的高光谱图像开发一些应用，粮食估产、环境监测、智慧城市。因为卫星是我们发，轨道是我们定，指哪拍哪：），这是一件了不起的事情。</p>
+<p>这是最好的时代。</p>
+<h4 id="哎"><a href="#哎" class="headerlink" title="哎"></a>哎</h4><p>总的来说，今年比较懒散，执行力还差很多，计划吃一个馒头，实际吃了一粒米的感觉。</p>
 <ul>
-<li>重置门$r_t$决定了新的hidden state中上一hidden state所占的比重</li>
-<li>新的hidden state由重置门过滤后的上一hidden state$h_{t-1}$和输入$x_t$经过非线性变幻$\tanh$激活得到</li>
-<li>更新门决定了当前hidden state中新的hidden state所占的比重，控制了最后的输出$h_t$中新的hidden state和上一hidden state所占的比重</li>
+<li>Leetcode 没刷</li>
+<li>西瓜书没好好看</li>
+<li>计划要总结的xgboost、svm、pca、hmm、crf一拖再拖</li>
+<li>开题还没弄</li>
+<li>Deep Learning的project毫无头绪</li>
+<li>原本的健身计划早让我给吃了</li>
+<li>….</li>
 </ul>
-<p>具体的前向传播公式为：</p>
-<p>\begin{equation}\begin{split}<br>z_t &amp;= \sigma (W_z[h_{t-1}, x_t])\\<br>r_t &amp;= \sigma(W_r \odot [h_{t-1}, x_t])\\<br>\tilde{h}_t &amp;= \tanh(W \odot [h_{t-1} \odot r_t,x_t])\\<br>h_t &amp;= (1-z_t) \odot h_{t-1} + z_t \odot \tilde{h}_t<br>\end{split}\end{equation}</p>
-<p>用图表示：</p>
-<p><div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/GRU.001.jpeg" width="600" alt="GRU" align="center"><br></div><br>前向传播代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">forward_prop_step</span><span class="params">(x, h_prev, W_x, W_h, b)</span>:</span></div><div class="line">	      </div><div class="line">  <span class="comment"># GRU Layer</span></div><div class="line">  z_t = sigmoid(W_x[<span class="number">0</span>].dot(x) + W_h[<span class="number">0</span>].dot(h_prev) + b[<span class="number">0</span>])</div><div class="line">  r_t = sigmoid(W_x[<span class="number">1</span>].dot(x) + W_h[<span class="number">1</span>].dot(h_prev) + b[<span class="number">1</span>])</div><div class="line">  c_t = np.tanh(W_x[<span class="number">2</span>].dot(x) + W_h[<span class="number">2</span>].dot(h_prev * r_t) + b[<span class="number">2</span>])</div><div class="line">  h_t = (np.ones_like(z_t1) - z_t) * h_prev + z_t * c_t</div><div class="line">       </div><div class="line">  <span class="keyword">return</span> h_t</div></pre></td></tr></table></figure>
-<p>借用Google Brain的<a href="http://www.wildml.com/" target="_blank" rel="external">Denny Britz</a>大神的总结：</p>
-<p>The basic idea of using a gating mechanism to learn long-term dependencies is the same as in a LSTM, but there are a few key differences:</p>
-<ul>
-<li>A GRU has two gates, an LSTM has three gates</li>
-<li>GRUs don’t possess and internal memory $c_t$ that is different from the exposed hidden state. They don’t have the output gate that is present in LSTMs</li>
-<li>The input and forget gates are coupled by an update gate $z$ and the reset gate $r$ is applied directly to the previous hidden state. Thus, the responsibility of the reset gate in a LSTM is really split up into both $r$ and $z$</li>
-<li>We don’t apply a second nonlinearity when computing the output</li>
-</ul>
-<p>相比于LSTM，GRU在网络结构上简化了很多，这篇文章<a href="https://arxiv.org/pdf/1412.3555v1.pdf" target="_blank" rel="external">Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling</a>对两者做了详细的对比，大概的结论是：</p>
-<p>用相同的参数个数，在一些任务中，GRU比LSTM收敛的更快。</p>
-<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><ul>
-<li><a href="http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/" target="_blank" rel="external">http://www.wildml.com/2015/10/recurrent-neural-network-tutorial-part-4-implementing-a-grulstm-rnn-with-python-and-theano/</a></li>
-<li><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="external">http://colah.github.io/posts/2015-08-Understanding-LSTMs/</a></li>
-</ul>
+<p>2016生活的太畏首畏尾，把太细的神经割掉会不会比较被明瞭？</p>
+<p>借老狼的歌词：</p>
+<blockquote>
+<p>我要 你在我身旁</p>
+<p>我要 你为我梳妆</p>
+<p>这夜的风儿吹</p>
+<p>吹的心痒痒</p>
+</blockquote>
+<p>回见，2016。</p>
+<p>2017，愿所有善良和努力的人都有好运。</p>
 
       
     </div>
@@ -390,13 +411,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/RNN/" rel="tag">#RNN</a>
+            <a href="/tags/2016/" rel="tag">#2016</a>
           
-            <a href="/tags/LSTM/" rel="tag">#LSTM</a>
-          
-            <a href="/tags/GRU/" rel="tag">#GRU</a>
-          
-            <a href="/tags/Deep-Learning/" rel="tag">#Deep Learning</a>
+            <a href="/tags/年终总结/" rel="tag">#年终总结</a>
           
         </div>
       
@@ -405,17 +422,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/13/初见RNN与LSTM/" rel="next" title="初见RNN与LSTM">
-                <i class="fa fa-chevron-left"></i> 初见RNN与LSTM
+              <a href="/2016/11/27/Tricks-in-Deep-Neural-Networks/" rel="next" title="Tricks in Deep Neural Networks">
+                <i class="fa fa-chevron-left"></i> Tricks in Deep Neural Networks
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/19/Hexo下mathjax的转义问题/" rel="prev" title="Hexo下mathjax的转义问题">
-                Hexo下mathjax的转义问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -441,8 +454,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/11/19/GRU/"
-           data-title="GRU" data-url="http://liyisong.com/2016/11/19/GRU/">
+      <div class="ds-thread" data-thread-key="2016/12/31/回见，2016/"
+           data-title="回见，2016" data-url="http://liyisong.com/2016/12/31/回见，2016/">
       </div>
     
   </div>
@@ -533,7 +546,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Architecture"><span class="nav-number">1.</span> <span class="nav-text">Architecture</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-number">2.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#圣诞"><span class="nav-number">1.</span> <span class="nav-text">圣诞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剧"><span class="nav-number">2.</span> <span class="nav-text">剧</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#激动"><span class="nav-number">3.</span> <span class="nav-text">激动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哎"><span class="nav-number">4.</span> <span class="nav-text">哎</span></a></li></ol></div>
             
           </div>
         </section>
