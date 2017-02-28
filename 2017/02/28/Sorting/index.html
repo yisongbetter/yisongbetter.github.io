@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Sorting,C++,Bug-free," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.2" />
+
+
+
+
+
+
+<meta name="description" content="算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sorting">
+<meta property="og:url" content="http://liyisong.com/2017/02/28/Sorting/index.html">
+<meta property="og:site_name" content="Yisong's Blog">
+<meta property="og:description" content="算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。">
+<meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/sort.001.jpeg">
+<meta property="og:updated_time" content="2017-02-28T15:22:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Sorting">
+<meta name="twitter:description" content="算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/sort.001.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://liyisong.com/2017/02/28/Sorting/"/>
+
+
+  <title> Sorting | Yisong's Blog </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Yisong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'v1Dyyxb3Zjr6GdnbmbaM','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Sorting
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-28T23:20:27+08:00" content="2017-02-28">
+              2017-02-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/翔实的干货/" itemprop="url" rel="index">
+                    <span itemprop="name">翔实的干货</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/28/Sorting/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/28/Sorting/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。<br><a id="more"></a></p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>冒泡排序的原理是重复走访过要排序的数列，一次比较两个元素，如果它们的顺序错误，就把它们交换。</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>比较相邻的两个元素，如果第一个比第二个大，就交换它们。</li>
+<li>对从第0个到n－1个元素重复做上述步骤，这时最大的数就浮到了数组最后的位置上。</li>
+<li>对所有元素重复以上步骤，除了最后一个。</li>
+<li>持续对越来越少的元素做上述步骤，直到没有任何一对数字需要比较。</li>
+</ol>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class BubbleSort{
+public:
+    int* bubbleSort(int *A,int n){
+        int tmp;
+        for(int i=n-1;i&gt;0;i--){
+            for(int j=0;j&lt;i;j++){
+                if(A[j]&gt;A[j+1]){
+                    tmp=A[j];
+                    A[j]=A[j+1];
+                    A[j+1]=tmp;                        
+                }
+            }
+        }
+        return A;
+    }
+};
+</code></pre><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>每次在未排序的数列中选出最小的放在最前面。</p>
+<h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>在未排序序列中找到最小的元素，存放到排序序列的起始位置。</li>
+<li>再从剩余未排序元素中继续寻找最小的元素，然后放到已排序序列的末尾。</li>
+<li>以此类推，直到所有元素均排序完毕。</li>
+</ol>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre><code>class SelectSort{
+public:
+    int* selectSort(int* A, int n){
+        if(n&lt;=0){
+            return NULL;
+        }
+        int minIndex = 0;
+        for(int i=0;i&lt;n-1;i++){
+            minIndex = i;
+            for(int j=i+1;j&lt;n;j++){
+                if(A[j]&lt;A[minIndex]){
+                    minIndex = j;
+                }
+            }
+            swap(A[i],A[minIndex]);
+        }
+        return A;
+    }
+};
+</code></pre><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><p>插入排序的工作原理是对于每个未排序数组，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>从第一个元素开始，该元素可以认为已经被排序；</li>
+<li>取出下一个元素，在已经排序的元素序列中从后向前扫描，如果被扫描的元素（已排序）大于新元素，将该元素后移一位；</li>
+<li>重复步骤2，直到找到已排序的元素小于或者等于新元素的位置，将新元素插入到该位置后；</li>
+<li>重复上述步骤，直到整个数组变得有序。</li>
+</ol>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre><code>class InsertSort{
+public:
+    int* insertSort(int* A, int n){
+        if(n&lt;=0){
+            return NULL;
+        }
+        int i, j;
+        for(i=1;i&lt;n;i++){
+            int tmp = A[i];
+            for(j=i-1;j&gt;=0&amp;&amp;tmp&lt;A[j];j--){
+                A[j+1] = A[j];
+            }
+            A[j+1] = tmp;
+        }
+        return A;
+    }
+};
+</code></pre><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h4 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h4><p>归并排序是分治法最典型的一个应用，思想就是先递归分解数组，再合并数组。</p>
+<h4 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>先考虑合并两个有序数组，比较两个数组的最前面的数，谁小就先取谁，取了之后相应的指针久往后移一位。然后再比较，直至其中一个数组为空，最后把另一个数组的剩余部分复制过来即可；</li>
+<li>再考虑递归分解，将数组分解成left和right，如果这两个数组内部是有序的，那么就可以用上面合并数组的方法将这两个数组合并排序。那么如何让这两个数组内部是有序的？可以再二分，直至分解出的小数组只含有一个元素时为止，此时认为该小组内部已经有序。只要合并排序两个相邻的小数组即可。</li>
+</ol>
+<h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><pre><code>class MergeSort {
+public:
+    int* mergeSort(int* A, int n) {
+        mergesort_recursion(A, 0, n-1);
+        return A;
+    }
+    void mergesort_recursion(int* A, int start, int end){
+        if(start &gt;= end){
+            return;
+        }
+        int mid=(start+end)/2;
+        mergesort_recursion(A, start, mid);
+        mergesort_recursion(A, mid+1, end);
+        merge(A, start, mid, end); 
+    }
+    void merge(int* A, int start, int mid, int end){
+        int i=start;
+        int j=mid+1;
+        int k=0;
+        int n=end-start+1;
+        int* tmp= new int[n];
+        //int* tmp = (int *)malloc((end-start+1) * sizeof(int));
+        while(i&lt;=mid &amp;&amp; j&lt;=end){
+            if (A[i]&lt;A[j]) {
+                tmp[k++]=A[i++];
+            }
+            else {
+                tmp[k++]=A[j++];
+            }
+        }
+        while (j&lt;=end) {
+            tmp[k++]=A[j++];
+        }
+        while (i&lt;=mid) {
+            tmp[k++]=A[i++];
+        }
+        for (int i=0;i&lt;k;i++) {
+            A[start+i]=tmp[i];
+        }
+        delete[] tmp;
+    }
+
+};
+</code></pre><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><p>快速排序通常比同为$O(n\log n)$的其他算法更快，因此常被采用，同样采用了分治法的思想。</p>
+<h4 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>从数列中挑选一个元素作为主元（一般取第一个）；</li>
+<li>将比主元大的元素放到右边，小于它的元素都放到左边（挖坑填数）；</li>
+<li>再对左右区间递归执行第二步，直至各区间只有一个数。</li>
+</ol>
+<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><pre><code>class QuickSort {
+public:
+    int* quickSort(int* A, int n) {
+        quicksort_recursion(A, 0, n-1);
+        return A;
+    }
+
+    void quicksort_recursion(int *A, int low, int high){
+        if (low&gt;=high) return;
+        int l=partition(A, low, high);
+        quicksort_recursion(A, low, l-1);
+        quicksort_recursion(A, l+1, high);
+    }
+
+    int partition(int *A, int l, int h){
+        int tmp=A[l];
+        while (l&lt;h) {
+            while (l&lt;h &amp;&amp; A[h]&gt;=tmp) h--;
+            A[l]=A[h];
+            while (l&lt;h &amp;&amp; A[l]&lt;=tmp) l++;
+            A[h]=A[l];    
+        }
+        A[l]=tmp;
+        return l;
+    }
+};
+</code></pre><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><h4 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h4><p>堆排序在top k问题中出现比较频繁。采用二叉堆的数据结构来实现，把最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
+<h4 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>最大堆调整：将堆的末端子节点作调整，使得子节点永远小于父节点；</li>
+<li>创建最大堆：将堆所有数据重新排序，使其成为最大堆；</li>
+<li>堆排序：移除在第一个数据的根结点，并做最大堆调整的递归运算。</li>
+</ol>
+<h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><pre><code>class HeapSort{
+public:
+    void AjustHeap(int* A, int index, int n){
+        int leftchild = 2*index +1;
+        int rightchild = 2*index+2;
+        int mark = index;
+        if (leftchild &lt; n &amp;&amp; A[leftchild] &gt; A[mark]) {
+            mark = leftchild;
+        }
+        if (rightchild &lt; n &amp;&amp; A[rightchild] &gt; A[mark]) {
+            mark = rightchild;
+        }
+        if (mark != index) {
+            swap(A[mark], A[index]);
+            AjustHeap(A, mark, n);
+        }
+    }
+    void BuildHeap(int* A, int n){
+        for (int i=(n-1)/2; i &gt;=0; i--) {
+            AjustHeap(A, i, n);
+        }
+    }
+    int* heapSort(int* A, int n){
+        if (n&lt;=0) return NULL;
+        BuildHeap(A, n);
+        for (int i = n - 1;i&gt;=0;i--) {
+            swap(A[0], A[i]);
+            n--;
+            AjustHeap(A, 0, n);
+        }
+        return A;
+    }
+};    
+</code></pre><h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><h4 id="原理-6"><a href="#原理-6" class="headerlink" title="原理"></a>原理</h4><p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法，其复杂度跟步长的选择有关。</p>
+<h4 id="步骤-6"><a href="#步骤-6" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>将数组放在一个表中对列分别进行插入排序；</li>
+<li>选用更小的步长、更长的列重复上述过程，直到整个表只有一列。</li>
+</ol>
+<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><pre><code>class ShellSort{
+public:
+    int* shellSort(int* A, int n){
+        int s, j, tmp;
+        for (s=n/2;s&gt;0;s/=2) {
+            for (int i=s;i&lt;n;i++) {
+                tmp = A[i];
+                for (j=i-s;j&gt;=0 &amp;&amp; tmp&lt;A[j];j-=s) {
+                    A[j+s] = A[j];
+                }
+                A[j+s] = tmp;
+            }
+        }
+    return A;    
+    }
+};
+</code></pre><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>七种经典排序算法时间复杂度如下：</p>
+<div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/sort.001.jpeg" width="600" alt="sorting" align="center"><br></div>
+
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<li><a href="http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/" target="_blank" rel="external">http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/</a></li>
+<li><a href="http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/" target="_blank" rel="external">http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Sorting/" rel="tag">#Sorting</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/Bug-free/" rel="tag">#Bug-free</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/27/Tricks-in-Deep-Neural-Networks/" rel="next" title="Tricks in Deep Neural Networks">
+                <i class="fa fa-chevron-left"></i> Tricks in Deep Neural Networks
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/28/Sorting/"
+           data-title="Sorting" data-url="http://liyisong.com/2017/02/28/Sorting/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="LiYisong" />
+          <p class="site-author-name" itemprop="name">LiYisong</p>
+          <p class="site-description motion-element" itemprop="description">谁活着未靠感觉做人才可悲</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">1.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-1"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-number">2.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-2"><span class="nav-number">3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-2"><span class="nav-number">3.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-2"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">4.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-3"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-3"><span class="nav-number">4.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-3"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">5.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-4"><span class="nav-number">5.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-4"><span class="nav-number">5.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-4"><span class="nav-number">5.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">6.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-5"><span class="nav-number">6.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-5"><span class="nav-number">6.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-5"><span class="nav-number">6.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">7.</span> <span class="nav-text">希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-6"><span class="nav-number">7.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-6"><span class="nav-number">7.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-6"><span class="nav-number">7.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">8.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">LiYisong</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.2"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"liyisong"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
