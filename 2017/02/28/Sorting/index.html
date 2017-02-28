@@ -91,7 +91,7 @@
 <meta property="og:site_name" content="Yisong's Blog">
 <meta property="og:description" content="算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。">
 <meta property="og:image" content="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/sort.001.jpeg">
-<meta property="og:updated_time" content="2017-02-28T15:22:49.000Z">
+<meta property="og:updated_time" content="2017-02-28T15:29:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Sorting">
 <meta name="twitter:description" content="算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。">
@@ -344,222 +344,59 @@
 
       
         <p>算法基础，废话不多说，7种经典排序算法c++实现及时间复杂度分析。<br><a id="more"></a></p>
-<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>冒泡排序的原理是重复走访过要排序的数列，一次比较两个元素，如果它们的顺序错误，就把它们交换。</p>
+<h2 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h2><h3 id="一、冒泡排序"><a href="#一、冒泡排序" class="headerlink" title="一、冒泡排序"></a>一、冒泡排序</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>冒泡排序的原理是重复走访过要排序的数列，一次比较两个元素，如果它们的顺序错误，就把它们交换。</p>
 <h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>比较相邻的两个元素，如果第一个比第二个大，就交换它们。</li>
 <li>对从第0个到n－1个元素重复做上述步骤，这时最大的数就浮到了数组最后的位置上。</li>
 <li>对所有元素重复以上步骤，除了最后一个。</li>
 <li>持续对越来越少的元素做上述步骤，直到没有任何一对数字需要比较。</li>
 </ol>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code>class BubbleSort{
-public:
-    int* bubbleSort(int *A,int n){
-        int tmp;
-        for(int i=n-1;i&gt;0;i--){
-            for(int j=0;j&lt;i;j++){
-                if(A[j]&gt;A[j+1]){
-                    tmp=A[j];
-                    A[j]=A[j+1];
-                    A[j+1]=tmp;                        
-                }
-            }
-        }
-        return A;
-    }
-};
-</code></pre><h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>每次在未排序的数列中选出最小的放在最前面。</p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> BubbleSort&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">bubbleSort</span><span class="params">(<span class="keyword">int</span> *A,<span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> tmp;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=n<span class="number">-1</span>;i&gt;<span class="number">0</span>;i--)&#123;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;i;j++)&#123;</div><div class="line">				<span class="keyword">if</span>(A[j]&gt;A[j+<span class="number">1</span>])&#123;</div><div class="line">					tmp=A[j];</div><div class="line">					A[j]=A[j+<span class="number">1</span>];</div><div class="line">					A[j+<span class="number">1</span>]=tmp;						</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> A;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="二、选择排序"><a href="#二、选择排序" class="headerlink" title="二、选择排序"></a>二、选择排序</h3><h4 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h4><p>每次在未排序的数列中选出最小的放在最前面。</p>
 <h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>在未排序序列中找到最小的元素，存放到排序序列的起始位置。</li>
 <li>再从剩余未排序元素中继续寻找最小的元素，然后放到已排序序列的末尾。</li>
 <li>以此类推，直到所有元素均排序完毕。</li>
 </ol>
-<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre><code>class SelectSort{
-public:
-    int* selectSort(int* A, int n){
-        if(n&lt;=0){
-            return NULL;
-        }
-        int minIndex = 0;
-        for(int i=0;i&lt;n-1;i++){
-            minIndex = i;
-            for(int j=i+1;j&lt;n;j++){
-                if(A[j]&lt;A[minIndex]){
-                    minIndex = j;
-                }
-            }
-            swap(A[i],A[minIndex]);
-        }
-        return A;
-    }
-};
-</code></pre><h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><p>插入排序的工作原理是对于每个未排序数组，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> SelectSort&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">selectSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(n&lt;=<span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> minIndex = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n<span class="number">-1</span>;i++)&#123;</div><div class="line">			minIndex = i;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>;j&lt;n;j++)&#123;</div><div class="line">				<span class="keyword">if</span>(A[j]&lt;A[minIndex])&#123;</div><div class="line">					minIndex = j;</div><div class="line">				&#125;</div><div class="line">			&#125;</div><div class="line">			swap(A[i],A[minIndex]);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> A;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="三、插入排序"><a href="#三、插入排序" class="headerlink" title="三、插入排序"></a>三、插入排序</h3><h4 id="原理-2"><a href="#原理-2" class="headerlink" title="原理"></a>原理</h4><p>插入排序的工作原理是对于每个未排序数组，在已排序序列中从后向前扫描，找到相应位置并插入。</p>
 <h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>从第一个元素开始，该元素可以认为已经被排序；</li>
 <li>取出下一个元素，在已经排序的元素序列中从后向前扫描，如果被扫描的元素（已排序）大于新元素，将该元素后移一位；</li>
 <li>重复步骤2，直到找到已排序的元素小于或者等于新元素的位置，将新元素插入到该位置后；</li>
 <li>重复上述步骤，直到整个数组变得有序。</li>
 </ol>
-<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre><code>class InsertSort{
-public:
-    int* insertSort(int* A, int n){
-        if(n&lt;=0){
-            return NULL;
-        }
-        int i, j;
-        for(i=1;i&lt;n;i++){
-            int tmp = A[i];
-            for(j=i-1;j&gt;=0&amp;&amp;tmp&lt;A[j];j--){
-                A[j+1] = A[j];
-            }
-            A[j+1] = tmp;
-        }
-        return A;
-    }
-};
-</code></pre><h3 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h3><h4 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h4><p>归并排序是分治法最典型的一个应用，思想就是先递归分解数组，再合并数组。</p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> InsertSort&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span>(n&lt;=<span class="number">0</span>)&#123;</div><div class="line">			<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">int</span> i, j;</div><div class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;n;i++)&#123;</div><div class="line">			<span class="keyword">int</span> tmp = A[i];</div><div class="line">			<span class="keyword">for</span>(j=i<span class="number">-1</span>;j&gt;=<span class="number">0</span>&amp;&amp;tmp&lt;A[j];j--)&#123;</div><div class="line">				A[j+<span class="number">1</span>] = A[j];</div><div class="line">			&#125;</div><div class="line">			A[j+<span class="number">1</span>] = tmp;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> A;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="四、归并排序"><a href="#四、归并排序" class="headerlink" title="四、归并排序"></a>四、归并排序</h3><h4 id="原理-3"><a href="#原理-3" class="headerlink" title="原理"></a>原理</h4><p>归并排序是分治法最典型的一个应用，思想就是先递归分解数组，再合并数组。</p>
 <h4 id="步骤-3"><a href="#步骤-3" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>先考虑合并两个有序数组，比较两个数组的最前面的数，谁小就先取谁，取了之后相应的指针久往后移一位。然后再比较，直至其中一个数组为空，最后把另一个数组的剩余部分复制过来即可；</li>
 <li>再考虑递归分解，将数组分解成left和right，如果这两个数组内部是有序的，那么就可以用上面合并数组的方法将这两个数组合并排序。那么如何让这两个数组内部是有序的？可以再二分，直至分解出的小数组只含有一个元素时为止，此时认为该小组内部已经有序。只要合并排序两个相邻的小数组即可。</li>
 </ol>
-<h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><pre><code>class MergeSort {
-public:
-    int* mergeSort(int* A, int n) {
-        mergesort_recursion(A, 0, n-1);
-        return A;
-    }
-    void mergesort_recursion(int* A, int start, int end){
-        if(start &gt;= end){
-            return;
-        }
-        int mid=(start+end)/2;
-        mergesort_recursion(A, start, mid);
-        mergesort_recursion(A, mid+1, end);
-        merge(A, start, mid, end); 
-    }
-    void merge(int* A, int start, int mid, int end){
-        int i=start;
-        int j=mid+1;
-        int k=0;
-        int n=end-start+1;
-        int* tmp= new int[n];
-        //int* tmp = (int *)malloc((end-start+1) * sizeof(int));
-        while(i&lt;=mid &amp;&amp; j&lt;=end){
-            if (A[i]&lt;A[j]) {
-                tmp[k++]=A[i++];
-            }
-            else {
-                tmp[k++]=A[j++];
-            }
-        }
-        while (j&lt;=end) {
-            tmp[k++]=A[j++];
-        }
-        while (i&lt;=mid) {
-            tmp[k++]=A[i++];
-        }
-        for (int i=0;i&lt;k;i++) {
-            A[start+i]=tmp[i];
-        }
-        delete[] tmp;
-    }
-
-};
-</code></pre><h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><p>快速排序通常比同为$O(n\log n)$的其他算法更快，因此常被采用，同样采用了分治法的思想。</p>
+<h4 id="代码-3"><a href="#代码-3" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> MergeSort &#123;</div><div class="line">   <span class="keyword">public</span>:</div><div class="line">       <span class="function"><span class="keyword">int</span>* <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">           mergesort_recursion(A, <span class="number">0</span>, n<span class="number">-1</span>);</div><div class="line">           <span class="keyword">return</span> A;</div><div class="line">       &#125;</div><div class="line">       <span class="function"><span class="keyword">void</span> <span class="title">mergesort_recursion</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">           <span class="keyword">if</span>(start &gt;= end)&#123;</div><div class="line">               <span class="keyword">return</span>;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">int</span> mid=(start+end)/<span class="number">2</span>;</div><div class="line">           mergesort_recursion(A, start, mid);</div><div class="line">           mergesort_recursion(A, mid+<span class="number">1</span>, end);</div><div class="line">           merge(A, start, mid, end); </div><div class="line">       &#125;</div><div class="line">       <span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> start, <span class="keyword">int</span> mid, <span class="keyword">int</span> end)</span></span>&#123;</div><div class="line">           <span class="keyword">int</span> i=start;</div><div class="line">           <span class="keyword">int</span> j=mid+<span class="number">1</span>;</div><div class="line">           <span class="keyword">int</span> k=<span class="number">0</span>;</div><div class="line">           <span class="keyword">int</span> n=end-start+<span class="number">1</span>;</div><div class="line">           <span class="keyword">int</span>* tmp= <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">           <span class="comment">//int* tmp = (int *)malloc((end-start+1) * sizeof(int));</span></div><div class="line">           <span class="keyword">while</span>(i&lt;=mid &amp;&amp; j&lt;=end)&#123;</div><div class="line">               <span class="keyword">if</span> (A[i]&lt;A[j]) &#123;</div><div class="line">                   tmp[k++]=A[i++];</div><div class="line">               &#125;</div><div class="line">               <span class="keyword">else</span> &#123;</div><div class="line">                   tmp[k++]=A[j++];</div><div class="line">               &#125;</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">while</span> (j&lt;=end) &#123;</div><div class="line">               tmp[k++]=A[j++];</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">while</span> (i&lt;=mid) &#123;</div><div class="line">               tmp[k++]=A[i++];</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++) &#123;</div><div class="line">               A[start+i]=tmp[i];</div><div class="line">           &#125;</div><div class="line">           <span class="keyword">delete</span>[] tmp;</div><div class="line">       &#125;</div><div class="line">       </div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="五、快速排序"><a href="#五、快速排序" class="headerlink" title="五、快速排序"></a>五、快速排序</h3><h4 id="原理-4"><a href="#原理-4" class="headerlink" title="原理"></a>原理</h4><p>快速排序通常比同为$O(n\log n)$的其他算法更快，因此常被采用，同样采用了分治法的思想。</p>
 <h4 id="步骤-4"><a href="#步骤-4" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>从数列中挑选一个元素作为主元（一般取第一个）；</li>
 <li>将比主元大的元素放到右边，小于它的元素都放到左边（挖坑填数）；</li>
 <li>再对左右区间递归执行第二步，直至各区间只有一个数。</li>
 </ol>
-<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><pre><code>class QuickSort {
-public:
-    int* quickSort(int* A, int n) {
-        quicksort_recursion(A, 0, n-1);
-        return A;
-    }
-
-    void quicksort_recursion(int *A, int low, int high){
-        if (low&gt;=high) return;
-        int l=partition(A, low, high);
-        quicksort_recursion(A, low, l-1);
-        quicksort_recursion(A, l+1, high);
-    }
-
-    int partition(int *A, int l, int h){
-        int tmp=A[l];
-        while (l&lt;h) {
-            while (l&lt;h &amp;&amp; A[h]&gt;=tmp) h--;
-            A[l]=A[h];
-            while (l&lt;h &amp;&amp; A[l]&lt;=tmp) l++;
-            A[h]=A[l];    
-        }
-        A[l]=tmp;
-        return l;
-    }
-};
-</code></pre><h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><h4 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h4><p>堆排序在top k问题中出现比较频繁。采用二叉堆的数据结构来实现，把最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
+<h4 id="代码-4"><a href="#代码-4" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> QuickSort &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">quickSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">		quicksort_recursion(A, <span class="number">0</span>, n<span class="number">-1</span>);</div><div class="line">		<span class="keyword">return</span> A;</div><div class="line">	&#125;</div><div class="line">	 </div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">quicksort_recursion</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span> (low&gt;=high) <span class="keyword">return</span>;</div><div class="line">		<span class="keyword">int</span> l=partition(A, low, high);</div><div class="line">		quicksort_recursion(A, low, l<span class="number">-1</span>);</div><div class="line">		quicksort_recursion(A, l+<span class="number">1</span>, high);</div><div class="line">	&#125;</div><div class="line">	 </div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span> *A, <span class="keyword">int</span> l, <span class="keyword">int</span> h)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> tmp=A[l];</div><div class="line">		<span class="keyword">while</span> (l&lt;h) &#123;</div><div class="line">			<span class="keyword">while</span> (l&lt;h &amp;&amp; A[h]&gt;=tmp) h--;</div><div class="line">			A[l]=A[h];</div><div class="line">			<span class="keyword">while</span> (l&lt;h &amp;&amp; A[l]&lt;=tmp) l++;</div><div class="line">			A[h]=A[l];	</div><div class="line">		&#125;</div><div class="line">		A[l]=tmp;</div><div class="line">		<span class="keyword">return</span> l;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="六、堆排序"><a href="#六、堆排序" class="headerlink" title="六、堆排序"></a>六、堆排序</h3><h4 id="原理-5"><a href="#原理-5" class="headerlink" title="原理"></a>原理</h4><p>堆排序在top k问题中出现比较频繁。采用二叉堆的数据结构来实现，把最大堆堆顶的最大数取出，将剩余的堆继续调整为最大堆，再次将堆顶的最大数取出，这个过程持续到剩余数只有一个时结束。</p>
 <h4 id="步骤-5"><a href="#步骤-5" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>最大堆调整：将堆的末端子节点作调整，使得子节点永远小于父节点；</li>
 <li>创建最大堆：将堆所有数据重新排序，使其成为最大堆；</li>
 <li>堆排序：移除在第一个数据的根结点，并做最大堆调整的递归运算。</li>
 </ol>
-<h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><pre><code>class HeapSort{
-public:
-    void AjustHeap(int* A, int index, int n){
-        int leftchild = 2*index +1;
-        int rightchild = 2*index+2;
-        int mark = index;
-        if (leftchild &lt; n &amp;&amp; A[leftchild] &gt; A[mark]) {
-            mark = leftchild;
-        }
-        if (rightchild &lt; n &amp;&amp; A[rightchild] &gt; A[mark]) {
-            mark = rightchild;
-        }
-        if (mark != index) {
-            swap(A[mark], A[index]);
-            AjustHeap(A, mark, n);
-        }
-    }
-    void BuildHeap(int* A, int n){
-        for (int i=(n-1)/2; i &gt;=0; i--) {
-            AjustHeap(A, i, n);
-        }
-    }
-    int* heapSort(int* A, int n){
-        if (n&lt;=0) return NULL;
-        BuildHeap(A, n);
-        for (int i = n - 1;i&gt;=0;i--) {
-            swap(A[0], A[i]);
-            n--;
-            AjustHeap(A, 0, n);
-        }
-        return A;
-    }
-};    
-</code></pre><h3 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h3><h4 id="原理-6"><a href="#原理-6" class="headerlink" title="原理"></a>原理</h4><p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法，其复杂度跟步长的选择有关。</p>
+<h4 id="代码-5"><a href="#代码-5" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> HeapSort&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">AjustHeap</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> index, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> leftchild = <span class="number">2</span>*index +<span class="number">1</span>;</div><div class="line">		<span class="keyword">int</span> rightchild = <span class="number">2</span>*index+<span class="number">2</span>;</div><div class="line">		<span class="keyword">int</span> mark = index;</div><div class="line">		<span class="keyword">if</span> (leftchild &lt; n &amp;&amp; A[leftchild] &gt; A[mark]) &#123;</div><div class="line">			mark = leftchild;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (rightchild &lt; n &amp;&amp; A[rightchild] &gt; A[mark]) &#123;</div><div class="line">			mark = rightchild;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (mark != index) &#123;</div><div class="line">			swap(A[mark], A[index]);</div><div class="line">			AjustHeap(A, mark, n);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">BuildHeap</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i=(n<span class="number">-1</span>)/<span class="number">2</span>; i &gt;=<span class="number">0</span>; i--) &#123;</div><div class="line">			AjustHeap(A, i, n);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">heapSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">if</span> (n&lt;=<span class="number">0</span>) <span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">		BuildHeap(A, n);</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>;i&gt;=<span class="number">0</span>;i--) &#123;</div><div class="line">			swap(A[<span class="number">0</span>], A[i]);</div><div class="line">			n--;</div><div class="line">			AjustHeap(A, <span class="number">0</span>, n);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> A;</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h3 id="七、希尔排序"><a href="#七、希尔排序" class="headerlink" title="七、希尔排序"></a>七、希尔排序</h3><h4 id="原理-6"><a href="#原理-6" class="headerlink" title="原理"></a>原理</h4><p>希尔排序，也称递减增量排序算法，实质是分组插入排序。由 Donald Shell 于1959年提出。希尔排序是非稳定排序算法，其复杂度跟步长的选择有关。</p>
 <h4 id="步骤-6"><a href="#步骤-6" class="headerlink" title="步骤"></a>步骤</h4><ol>
 <li>将数组放在一个表中对列分别进行插入排序；</li>
 <li>选用更小的步长、更长的列重复上述过程，直到整个表只有一列。</li>
 </ol>
-<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><pre><code>class ShellSort{
-public:
-    int* shellSort(int* A, int n){
-        int s, j, tmp;
-        for (s=n/2;s&gt;0;s/=2) {
-            for (int i=s;i&lt;n;i++) {
-                tmp = A[i];
-                for (j=i-s;j&gt;=0 &amp;&amp; tmp&lt;A[j];j-=s) {
-                    A[j+s] = A[j];
-                }
-                A[j+s] = tmp;
-            }
-        }
-    return A;    
-    }
-};
-</code></pre><h3 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h3><p>七种经典排序算法时间复杂度如下：</p>
+<h4 id="代码-6"><a href="#代码-6" class="headerlink" title="代码"></a>代码</h4><pre><code><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> ShellSort&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">int</span>* <span class="title">shellSort</span><span class="params">(<span class="keyword">int</span>* A, <span class="keyword">int</span> n)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> s, j, tmp;</div><div class="line">		<span class="keyword">for</span> (s=n/<span class="number">2</span>;s&gt;<span class="number">0</span>;s/=<span class="number">2</span>) &#123;</div><div class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i=s;i&lt;n;i++) &#123;</div><div class="line">				tmp = A[i];</div><div class="line">				<span class="keyword">for</span> (j=i-s;j&gt;=<span class="number">0</span> &amp;&amp; tmp&lt;A[j];j-=s) &#123;</div><div class="line">					A[j+s] = A[j];</div><div class="line">				&#125;</div><div class="line">				A[j+s] = tmp;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	<span class="keyword">return</span> A;	</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</code></pre><h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>七种经典排序算法时间复杂度如下：</p>
 <div align="center"><br><img src="https://raw.githubusercontent.com/yisongbetter/Markdown-Photos/master/sort.001.jpeg" width="600" alt="sorting" align="center"><br></div>
 
-<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><ul>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
 <li><a href="http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/" target="_blank" rel="external">http://bubkoo.com/2014/01/14/sort-algorithm/heap-sort/</a></li>
 <li><a href="http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/" target="_blank" rel="external">http://wuchong.me/blog/2014/02/09/algorithm-sort-summary/</a></li>
 </ul>
@@ -722,7 +559,7 @@ public:
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#冒泡排序"><span class="nav-number">1.</span> <span class="nav-text">冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">1.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择排序"><span class="nav-number">2.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-1"><span class="nav-number">2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-number">2.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number">2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入排序"><span class="nav-number">3.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-2"><span class="nav-number">3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-2"><span class="nav-number">3.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-2"><span class="nav-number">3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#归并排序"><span class="nav-number">4.</span> <span class="nav-text">归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-3"><span class="nav-number">4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-3"><span class="nav-number">4.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-3"><span class="nav-number">4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速排序"><span class="nav-number">5.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-4"><span class="nav-number">5.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-4"><span class="nav-number">5.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-4"><span class="nav-number">5.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">6.</span> <span class="nav-text">堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-5"><span class="nav-number">6.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-5"><span class="nav-number">6.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-5"><span class="nav-number">6.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#希尔排序"><span class="nav-number">7.</span> <span class="nav-text">希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-6"><span class="nav-number">7.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-6"><span class="nav-number">7.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-6"><span class="nav-number">7.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间复杂度"><span class="nav-number">8.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考资料"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排序算法"><span class="nav-number">1.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、冒泡排序"><span class="nav-number">1.1.</span> <span class="nav-text">一、冒泡排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理"><span class="nav-number">1.1.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">1.1.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码"><span class="nav-number">1.1.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、选择排序"><span class="nav-number">1.2.</span> <span class="nav-text">二、选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-1"><span class="nav-number">1.2.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、插入排序"><span class="nav-number">1.3.</span> <span class="nav-text">三、插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-2"><span class="nav-number">1.3.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-2"><span class="nav-number">1.3.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、归并排序"><span class="nav-number">1.4.</span> <span class="nav-text">四、归并排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-3"><span class="nav-number">1.4.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-3"><span class="nav-number">1.4.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-3"><span class="nav-number">1.4.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、快速排序"><span class="nav-number">1.5.</span> <span class="nav-text">五、快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-4"><span class="nav-number">1.5.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-4"><span class="nav-number">1.5.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-4"><span class="nav-number">1.5.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、堆排序"><span class="nav-number">1.6.</span> <span class="nav-text">六、堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-5"><span class="nav-number">1.6.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-5"><span class="nav-number">1.6.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-5"><span class="nav-number">1.6.3.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、希尔排序"><span class="nav-number">1.7.</span> <span class="nav-text">七、希尔排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原理-6"><span class="nav-number">1.7.1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-6"><span class="nav-number">1.7.2.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码-6"><span class="nav-number">1.7.3.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间复杂度"><span class="nav-number">2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
           </div>
         </section>
